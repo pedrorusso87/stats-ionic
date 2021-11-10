@@ -1,0 +1,7 @@
+{
+  "name": "stats-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
