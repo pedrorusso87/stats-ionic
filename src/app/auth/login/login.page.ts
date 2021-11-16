@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../services/auth.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from '../services/auth.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import * as fromLogin from '../login/store';
-import { Store } from "@ngrx/store";
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -29,11 +29,11 @@ export class LoginPage implements OnInit {
 
   login() {
     const loginRequest = {
-      email: this.getEmail(),
+      username: this.getEmail(),
       password: this.getPassword()
-    }
-    this.store.dispatch(new fromLogin.LoginUser(loginRequest));
+    };
 
+    this.store.dispatch(new fromLogin.LoginUser(loginRequest));
   }
 
   getEmail(): any {

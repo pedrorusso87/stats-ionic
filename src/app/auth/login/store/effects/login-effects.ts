@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { AuthService } from "../../../services/auth.service";
+import { AuthService } from '../../../services/auth.service';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import * as loginUserActions from '../login-actions';
@@ -26,12 +25,10 @@ export default class LoginEffects {
     })
   ));
 
-  loginUserSuccess$ = createEffect(() =>  this.actions$.pipe(
+  saveUserToStorage$ = createEffect(() =>  this.actions$.pipe(
     ofType(loginUserActions.SAVE_USER),
-    map((data: any) => {
-        //this.localStorageService.store('authToken', data.payload.authenticationToken);
-       //this.localStorageService.store('username', data.payload.username);
-        return new loginUserActions.LoginUserSuccess()
+    switchMap((data: any) => {
+      return of(this.authService.saveUser(data.payload));
     })
   ));
 }

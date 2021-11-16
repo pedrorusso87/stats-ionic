@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import {StoreModule} from "@ngrx/store";
 import {LoginPageModule} from "./auth/login/login.module";
 import {EffectsModule} from "@ngrx/effects";
-import {effects} from "./auth/login/store";
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +21,9 @@ import {effects} from "./auth/login/store";
     IonicStorageModule.forRoot(),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 20
+    }),
     LoginPageModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { UserLoginRequest, LoginResponse} from "../../models/user.login";
+import { UserLoginRequest, LoginResponse} from '../../models/user.login';
 
 export const LOGIN_USER = '[AUTH] login user';
 export const LOGIN_USER_SUCCESS = '[AUTH] login user success';
@@ -27,4 +27,4 @@ export class LoginUserFailed implements Action {
   constructor( public payload: any) {}
 }
 // action types
-export type LoginUserActions = LoginUser | LoginUserSuccess | LoginUserFailed
+export type LoginUserActions = LoginUser | LoginUserSuccess | LoginUserFailed;

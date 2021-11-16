@@ -1,7 +1,7 @@
 import * as fromLogin from '../login-actions';
-import {LoggedUserState} from "../../../models/user.login";
+import {LoggedUserState} from '../../../models/user.login';
 
-export const initialState: LoggedUserState = {
+const initialState: LoggedUserState = {
   loginPending: false,
   error: null,
   currentUser: null

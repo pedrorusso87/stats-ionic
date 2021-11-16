@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Platform} from '@ionic/angular';
-import {Storage} from '@ionic/storage-angular'
-import {from, Observable} from "rxjs";
-import {map, switchMap} from "rxjs/operators";
-import {LoginResponse, UserLoginRequest} from "../models/user.login";
-import {environment} from "../../../environments/environment";
-import {Router} from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular'
+import {from, Observable } from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
+import { UserLoginRequest } from '../models/user.login';
+import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
+import * as loginUserActions from '../login/store/login-actions';
 
-const TOKEN_KEY = 'authToken';
+const TOKEN_KEY = 'authenticationToken';
 
 @Injectable({
   providedIn: 'root'
@@ -23,23 +24,25 @@ export class AuthService {
     private platform: Platform,
     private router: Router
   ) {
-    this.loadTokenFromStore();
+    this.init();
   }
 
-  loadTokenFromStore() {
-    this.user = from(this.platform.ready()).pipe(
-      switchMap(() => {
-        return from(this.storage.get(TOKEN_KEY))
-      }),
-      map(token => {
-        console.log('got token')
-      })
-    )
+  async init() {
+    await this.storage.create();
+  }
+
+  getAuthenticationToken() {
+    return this.storage.get(TOKEN_KEY) || [];
   }
 
   loginUser(userLoginRequest: UserLoginRequest): Observable<any> {
-    console.log(this.httpClient.post(`${this.url}/api/auth/login`, userLoginRequest))
     return this.httpClient.post(`${this.url}/api/auth/login`, userLoginRequest);
+  }
+
+  saveUser(data) {
+    this.storage.set(TOKEN_KEY, data.authenticationToken)
+    this.storage.set('username', data.username)
+    return new loginUserActions.LoginUserSuccess()
   }
 
   logout() {
