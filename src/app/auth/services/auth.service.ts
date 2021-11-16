@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Platform } from '@ionic/angular';
+import {LoadingController, Platform} from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular'
 import {from, Observable } from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
