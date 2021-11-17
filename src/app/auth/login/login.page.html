@@ -13,16 +13,16 @@
         </ion-card-header>
         <ion-card-content>
           <ion-item lines="none">
-            <ion-label position="stacked">Email</ion-label>
-            <ion-input formControlName="username" type="email" placeholder="Email" name="email"></ion-input>
+            <ion-label position="stacked">Usuario</ion-label>
+            <ion-input formControlName="username" type="text" placeholder="Nombre de usuario" name="username"></ion-input>
           </ion-item>
           <ion-item lines="none">
-            <ion-label position="stacked">Password</ion-label>
+            <ion-label position="stacked">Contraseña</ion-label>
             <ion-input formControlName="password" type="password" placeholder="Password" name="password">
             </ion-input>
           </ion-item>
           <ion-button (click)="login()" expand="block">Login</ion-button>
-          <p class="ion-padding-top">¿No tienes cuenta? <a>Crea</a> una</p>
+          <p class="ion-padding-top">¿No tienes cuenta? <a routerLink="/register">Crea</a> una</p>
         </ion-card-content>
       </ion-card>
     </ion-col>

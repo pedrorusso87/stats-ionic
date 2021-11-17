@@ -8,6 +8,7 @@ import { UserLoginRequest } from '../models/user.login';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import * as loginUserActions from '../login/store/login-actions';
+import {UserRegistrationRequest} from '../models/user.register';
 
 const TOKEN_KEY = 'authenticationToken';
 
@@ -37,6 +38,10 @@ export class AuthService {
 
   loginUser(userLoginRequest: UserLoginRequest): Observable<any> {
     return this.httpClient.post(`${this.url}/api/auth/login`, userLoginRequest);
+  }
+
+  public register(registerRequest: UserRegistrationRequest): Observable<any> {
+    return this.httpClient.post(`${this.url}/api/auth/signup`, registerRequest);
   }
 
   saveUser(data) {
