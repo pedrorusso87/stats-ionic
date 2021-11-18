@@ -6,7 +6,6 @@ import {Router} from '@angular/router';
 import {LoadingController} from '@ionic/angular';
 import {UserRegistrationRequest} from '../models/user.register';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -45,13 +44,25 @@ export class RegisterPage implements OnInit {
       email: this.getEmail(),
       password: this.getPassword()
     }
-    this.authService.register(this.userRegistrationRequest).subscribe(response => {
-      console.log(response);
+    this.authService.register(this.userRegistrationRequest).subscribe(async response => {
+      // check if the new username comes in the response. This means that the register process was successful
+      await this.presentLoading();
+      if(response && response.username) {
+        await this.router.navigate(['/home'])
+        await this.loadingController.dismiss();
+      }
     });
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+    await loading.present();
+  }
+
   validatePassword() {
-    console.log("adasd")
     if (this.getConfirmedPassword() !== this.getPassword()) {
       this.registerForm.get('confirmedPassword').setErrors({ invalid: true })
     } else {
