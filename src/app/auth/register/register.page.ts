@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
@@ -12,6 +12,7 @@ import {UserRegistrationRequest} from '../models/user.register';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  @ViewChild('passwordEyeRegister') passwordEye;
   registerForm: FormGroup;
   email = new FormControl('', Validators.compose([Validators.required,
     Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]));
@@ -19,6 +20,8 @@ export class RegisterPage implements OnInit {
   password = new FormControl('', Validators.required);
   confirmedPassword = new FormControl('', Validators.required);
   userRegistrationRequest = {} as UserRegistrationRequest
+  passwordTypeInput  =  'password';
+  passwordIcon  =  'eye-off';
 
   constructor(
     private authService: AuthService,
@@ -68,6 +71,13 @@ export class RegisterPage implements OnInit {
     } else {
       this.registerForm.get('confirmedPassword').setErrors(null)
     }
+  }
+
+
+  togglePasswordMode() {
+    this.passwordTypeInput  =  this.passwordTypeInput  ===  'text'  ?  'password'  :  'text';
+    this.passwordIcon  =  this.passwordIcon  ===  'eye-off'  ?  'eye'  :  'eye-off';
+    this.passwordEye.el.setFocus();
   }
 
   getEmail(): any {

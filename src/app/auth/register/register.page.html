@@ -25,14 +25,21 @@
             </ion-item>
             <ion-item class="ion-padding-top">
               <ion-label position="stacked">Contraseña</ion-label>
-              <ion-input formControlName="password" type="password" placeholder="Contraseña" name="password">
+              <ion-input #passwordEyeRegister [type]="passwordTypeInput" formControlName="password"
+                placeholder="Contraseña" name="password">
               </ion-input>
+              <span slot="end">
+              <ion-icon name="eye" [name]="passwordIcon"
+                [ngClass]="passwordTypeInput === 'text' ? 'icon-text' : 'icon-password'"
+                (click)="togglePasswordMode()">
+              </ion-icon>
+            </span>
             </ion-item>
             <ion-item class="ion-padding-top">
               <ion-label position="stacked">Repetir Contraseña</ion-label>
-              <ion-input formControlName="confirmedPassword" type="password" placeholder="Repetir Contraseña"
-                         name="confirmedPassword"
-                         (keyup)="validatePassword()">
+              <ion-input [type]="passwordTypeInput" formControlName="confirmedPassword" placeholder="Repetir Contraseña"
+                name="confirmedPassword"
+                (ionChange)="validatePassword()">
               </ion-input>
             </ion-item>
             <ion-label class="error-label" position="stacked"

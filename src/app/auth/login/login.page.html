@@ -14,15 +14,24 @@
         <ion-card-content>
           <ion-item lines="none">
             <ion-label position="stacked">Usuario</ion-label>
-            <ion-input formControlName="username" type="text" placeholder="Nombre de usuario" name="username"></ion-input>
+            <ion-input formControlName="username" type="text"
+              placeholder="Nombre de usuario" name="username">
+            </ion-input>
           </ion-item>
           <ion-item lines="none">
             <ion-label position="stacked">Contraseña</ion-label>
-            <ion-input formControlName="password" type="password" placeholder="Password" name="password">
+            <ion-input  #passwordEyeRegister [type]="passwordTypeInput" formControlName="password"
+              placeholder="Password" name="password">
             </ion-input>
+            <span slot="end">
+              <ion-icon name="eye" [name]="passwordIcon"
+                [ngClass]="passwordTypeInput === 'text' ? 'icon-text' : 'icon-password'"
+                (click)="togglePasswordMode()">
+              </ion-icon>
+            </span>
           </ion-item>
           <ion-button (click)="login()" expand="block">Login</ion-button>
-          <p class="ion-padding-top">¿No tienes cuenta? <a routerLink="/register">Crea</a> una</p>
+          <p class="ion-padding-top">¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
         </ion-card-content>
       </ion-card>
     </ion-col>

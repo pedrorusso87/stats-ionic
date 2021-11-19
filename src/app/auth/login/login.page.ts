@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as fromLogin from '../login/store';
@@ -12,10 +12,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  @ViewChild('passwordEyeRegister') passwordEye;
   loginForm: FormGroup;
   username = new FormControl('', Validators.required);
   password = new FormControl('', Validators.required);
   loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending);
+  passwordTypeInput  =  'password';
+  passwordIcon  =  'eye-off';
 
   constructor(
     private auth: AuthService,
@@ -58,6 +61,12 @@ export class LoginPage implements OnInit {
         this.router.navigate(['/home']);
       }
     })
+  }
+
+  togglePasswordMode() {
+    this.passwordTypeInput  =  this.passwordTypeInput  ===  'text'  ?  'password'  :  'text';
+    this.passwordIcon  =  this.passwordIcon  ===  'eye-off'  ?  'eye'  :  'eye-off';
+    this.passwordEye.el.setFocus();
   }
 
   getEmail(): any {
