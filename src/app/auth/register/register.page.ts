@@ -5,6 +5,7 @@ import {Store} from '@ngrx/store';
 import {Router} from '@angular/router';
 import {LoadingController} from '@ionic/angular';
 import {UserRegistrationRequest} from '../models/user.register';
+import * as fromRegister from '../register/store';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,8 @@ import {UserRegistrationRequest} from '../models/user.register';
 export class RegisterPage implements OnInit {
   @ViewChild('passwordEyeRegister') passwordEye;
   registerForm: FormGroup;
+  registerUserPending$ = this.store.select(fromRegister.gerRegisterUserPending);
+
   email = new FormControl('', Validators.compose([Validators.required,
     Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]));
   username = new FormControl('', Validators.required);
@@ -41,20 +44,15 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(): void {
+  register(): void {
     this.userRegistrationRequest = {
       username: this.getUsername(),
       email: this.getEmail(),
       password: this.getPassword()
     }
-    this.authService.register(this.userRegistrationRequest).subscribe(async response => {
-      // check if the new username comes in the response. This means that the register process was successful
-      await this.presentLoading();
-      if(response && response.username) {
-        await this.router.navigate(['/home'])
-        await this.loadingController.dismiss();
-      }
-    });
+
+    this.store.dispatch(new fromRegister.RegisterUser(this.userRegistrationRequest));
+    this.presentLoading();
   }
 
   async presentLoading() {
@@ -63,6 +61,16 @@ export class RegisterPage implements OnInit {
       message: 'Please wait...',
     });
     await loading.present();
+    this.listenForRegister();
+  }
+
+  listenForRegister(): void {
+    this.registerUserPending$.pipe().subscribe(pending => {
+      if(!pending) {
+        this.loadingController.dismiss();
+        this.router.navigate(['/home']);
+      }
+    })
   }
 
   validatePassword() {

@@ -304,6 +304,8 @@ let LoginPage = class LoginPage {
         this.username = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required);
         this.password = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl('', _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required);
         this.loginUserPending$ = this.store.select(_login_store__WEBPACK_IMPORTED_MODULE_3__.getLoggedUserPending);
+        this.passwordTypeInput = 'password';
+        this.passwordIcon = 'eye-off';
         this.loginForm = this.fb.group({
             username: this.username,
             password: this.password
@@ -337,6 +339,11 @@ let LoginPage = class LoginPage {
             }
         });
     }
+    togglePasswordMode() {
+        this.passwordTypeInput = this.passwordTypeInput === 'text' ? 'password' : 'text';
+        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+        this.passwordEye.el.setFocus();
+    }
     getEmail() {
         var _a;
         return (_a = this.loginForm.get('username')) === null || _a === void 0 ? void 0 : _a.value;
@@ -353,6 +360,9 @@ LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router }
 ];
+LoginPage.propDecorators = {
+    passwordEye: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__.ViewChild, args: ['passwordEyeRegister',] }]
+};
 LoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-login',
@@ -485,10 +495,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LOGIN_USER_FAIL": () => (/* binding */ LOGIN_USER_FAIL),
 /* harmony export */   "SAVE_USER": () => (/* binding */ SAVE_USER),
 /* harmony export */   "LoginUser": () => (/* binding */ LoginUser),
-/* harmony export */   "SaveUserToStorage": () => (/* binding */ SaveUserToStorage),
 /* harmony export */   "LoginUserSuccess": () => (/* binding */ LoginUserSuccess),
+/* harmony export */   "SaveUserToStorage": () => (/* binding */ SaveUserToStorage),
 /* harmony export */   "LoginUserFailed": () => (/* binding */ LoginUserFailed)
 /* harmony export */ });
+//Login actions
 const LOGIN_USER = '[AUTH] login user';
 const LOGIN_USER_SUCCESS = '[AUTH] login user success';
 const LOGIN_USER_FAIL = '[AUTH] login user failed';
@@ -499,15 +510,15 @@ class LoginUser {
         this.type = LOGIN_USER;
     }
 }
+class LoginUserSuccess {
+    constructor() {
+        this.type = LOGIN_USER_SUCCESS;
+    }
+}
 class SaveUserToStorage {
     constructor(payload) {
         this.payload = payload;
         this.type = SAVE_USER;
-    }
-}
-class LoginUserSuccess {
-    constructor() {
-        this.type = LOGIN_USER_SUCCESS;
     }
 }
 class LoginUserFailed {
@@ -980,7 +991,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsb2dpbi5wYWdlLnNjc3MifQ== */");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("ion-icon {\n  color: darkgray;\n  margin: 15px -13px -33px 0;\n  font-size: 27px;\n  padding: 0px 7px 12px 0px;\n}\n\n.icon-text {\n  color: black;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvZ2luLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNFLGVBQUE7RUFDQSwwQkFBQTtFQUNBLGVBQUE7RUFDQSx5QkFBQTtBQUFGOztBQUdBO0VBQ0UsWUFBQTtBQUFGIiwiZmlsZSI6ImxvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIEhhY2t5IGFuZCB2ZXJ5IHVnbHkuLiBidXQgd2hhdCBhcmUgZ29ubmEgZG8/XHJcbmlvbi1pY29uIHtcclxuICBjb2xvcjogZGFya2dyYXk7XHJcbiAgbWFyZ2luOiAxNXB4IC0xM3B4IC0zM3B4IDA7XHJcbiAgZm9udC1zaXplOiAyN3B4O1xyXG4gIHBhZGRpbmc6IDBweCA3cHggMTJweCAwcHg7XHJcbn1cclxuXHJcbi5pY29uLXRleHQge1xyXG4gIGNvbG9yOiBibGFjaztcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -1010,7 +1021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>Versus App</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"ion-padding\">\r\n  <ion-row>\r\n    <ion-col size=\"12\" size-sm=\"10\" offset-sm=\"1\" size-md=\"8\" offset-md=\"2\" size-lg=\"6\" offset-lg=\"3\" size-xl=\"4\"\r\n             offset-xl=\"4\">\r\n      <ion-card [formGroup]=\"loginForm\">\r\n        <ion-card-header>\r\n          <ion-card-title class=\"ion-text-center\">{{'iniciar sesion' | titlecase}}</ion-card-title>\r\n        </ion-card-header>\r\n        <ion-card-content>\r\n          <ion-item lines=\"none\">\r\n            <ion-label position=\"stacked\">Usuario</ion-label>\r\n            <ion-input formControlName=\"username\" type=\"text\" placeholder=\"Nombre de usuario\" name=\"username\"></ion-input>\r\n          </ion-item>\r\n          <ion-item lines=\"none\">\r\n            <ion-label position=\"stacked\">Contraseña</ion-label>\r\n            <ion-input formControlName=\"password\" type=\"password\" placeholder=\"Password\" name=\"password\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <ion-button (click)=\"login()\" expand=\"block\">Login</ion-button>\r\n          <p class=\"ion-padding-top\">¿No tienes cuenta? <a routerLink=\"/register\">Crea</a> una</p>\r\n        </ion-card-content>\r\n      </ion-card>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>Versus App</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content class=\"ion-padding\">\r\n  <ion-row>\r\n    <ion-col size=\"12\" size-sm=\"10\" offset-sm=\"1\" size-md=\"8\" offset-md=\"2\" size-lg=\"6\" offset-lg=\"3\" size-xl=\"4\"\r\n             offset-xl=\"4\">\r\n      <ion-card [formGroup]=\"loginForm\">\r\n        <ion-card-header>\r\n          <ion-card-title class=\"ion-text-center\">{{'iniciar sesion' | titlecase}}</ion-card-title>\r\n        </ion-card-header>\r\n        <ion-card-content>\r\n          <ion-item lines=\"none\">\r\n            <ion-label position=\"stacked\">Usuario</ion-label>\r\n            <ion-input formControlName=\"username\" type=\"text\"\r\n              placeholder=\"Nombre de usuario\" name=\"username\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <ion-item lines=\"none\">\r\n            <ion-label position=\"stacked\">Contraseña</ion-label>\r\n            <ion-input  #passwordEyeRegister [type]=\"passwordTypeInput\" formControlName=\"password\"\r\n              placeholder=\"Password\" name=\"password\">\r\n            </ion-input>\r\n            <span slot=\"end\">\r\n              <ion-icon name=\"eye\" [name]=\"passwordIcon\"\r\n                [ngClass]=\"passwordTypeInput === 'text' ? 'icon-text' : 'icon-password'\"\r\n                (click)=\"togglePasswordMode()\">\r\n              </ion-icon>\r\n            </span>\r\n          </ion-item>\r\n          <ion-button (click)=\"login()\" expand=\"block\" [disabled]=\"!this.loginForm.valid\">Login</ion-button>\r\n          <p class=\"ion-padding-top\">¿No tienes cuenta? <a routerLink=\"/register\">Regístrate</a></p>\r\n        </ion-card-content>\r\n      </ion-card>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-content>\r\n");
 
 /***/ })
 

@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { UserLoginRequest, LoginResponse} from '../../models/user.login';
 
+//Login actions
 export const LOGIN_USER = '[AUTH] login user';
 export const LOGIN_USER_SUCCESS = '[AUTH] login user success';
 export const LOGIN_USER_FAIL = '[AUTH] login user failed';
@@ -12,14 +13,14 @@ export class LoginUser implements Action {
   constructor( public payload: UserLoginRequest) {}
 }
 
-export class SaveUserToStorage implements Action {
-  readonly type = SAVE_USER;
-  constructor( public payload: LoginResponse) {}
-}
-
 export class LoginUserSuccess implements Action {
   readonly type = LOGIN_USER_SUCCESS;
   constructor() {}
+}
+
+export class SaveUserToStorage implements Action {
+  readonly type = SAVE_USER;
+  constructor( public payload: LoginResponse) {}
 }
 
 export class LoginUserFailed implements Action {

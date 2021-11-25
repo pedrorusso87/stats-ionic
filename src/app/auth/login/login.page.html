@@ -30,7 +30,7 @@
               </ion-icon>
             </span>
           </ion-item>
-          <ion-button (click)="login()" expand="block">Login</ion-button>
+          <ion-button (click)="login()" expand="block" [disabled]="!this.loginForm.valid">Login</ion-button>
           <p class="ion-padding-top">¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
         </ion-card-content>
       </ion-card>
