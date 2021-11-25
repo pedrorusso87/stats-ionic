@@ -12,18 +12,20 @@ import {HttpClientModule} from "@angular/common/http";
 import {StoreModule} from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { reducers, effects } from './store';
+import {TabsPageModule} from '../../tabs/tabs.module';
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    LoginPageRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('loggedUser', reducers),
-    EffectsModule.forFeature(effects),
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        LoginPageRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        StoreModule.forFeature('loggedUser', reducers),
+        EffectsModule.forFeature(effects),
+        TabsPageModule,
+    ],
   declarations: [LoginPage],
   providers: [AuthService]
 })

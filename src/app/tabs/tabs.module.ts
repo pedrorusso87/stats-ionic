@@ -16,6 +16,9 @@ import {TitleComponent} from '../components/title/title.component';
     FormsModule,
     TabsPageRoutingModule,
   ],
+  exports: [
+    TitleComponent
+  ],
   declarations: [TabsPage, TitleComponent]
 })
 export class TabsPageModule {}

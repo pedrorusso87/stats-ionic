@@ -11,17 +11,19 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './store';
 import {EffectsModule} from '@ngrx/effects';
 import {effects} from './store';
+import {TabsPageModule} from '../../tabs/tabs.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    IonicModule,
-    RegisterPageRoutingModule,
-    StoreModule.forFeature('registeredUser', reducers),
-    EffectsModule.forFeature(effects),
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        IonicModule,
+        RegisterPageRoutingModule,
+        StoreModule.forFeature('registeredUser', reducers),
+        EffectsModule.forFeature(effects),
+        TabsPageModule,
+    ],
   declarations: [RegisterPage]
 })
 export class RegisterPageModule {}
