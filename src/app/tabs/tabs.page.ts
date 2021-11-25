@@ -9,10 +9,8 @@ import {LoadingController} from '@ionic/angular';
 export class TabsPage implements OnInit{
 
   constructor(
-    private loadingController: LoadingController
   ) {}
 
   ngOnInit() {
-    this.loadingController.dismiss('loading-controller')
   }
 }

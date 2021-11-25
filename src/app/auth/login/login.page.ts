@@ -5,7 +5,7 @@ import * as fromLogin from '../login/store';
 import { Store } from '@ngrx/store';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {Router} from "@angular/router";
-import {first, take} from 'rxjs/operators';
+import {first, last, take} from 'rxjs/operators';
 import {concatLatestFrom} from '@ngrx/effects';
 import {combineLatest, concat} from 'rxjs';
 
@@ -16,8 +16,9 @@ import {combineLatest, concat} from 'rxjs';
 })
 export class LoginPage implements OnInit {
   @ViewChild('passwordEyeRegister') passwordEye;
-  loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending).pipe(first());
-  loginError$ = this.store.select(fromLogin.getLoggedUserError).pipe(first());
+  loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending);
+  loginError$ = this.store.select(fromLogin.getLoggedUserError);
+  loginError = false;
 
   loginForm: FormGroup;
   username = new FormControl('', Validators.required);
@@ -71,22 +72,14 @@ export class LoginPage implements OnInit {
   listenForError() {
     this.loginError$.subscribe(error => {
       if(!error) {
+        this.loginError = false;
+        this.loadingController.dismiss();
         this.router.navigate(['/home']);
       } else {
+        this.loginError = true;
         this.loadingController.dismiss();
-        this.presentAlert();
       }
     })
-  }
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'alert-error',
-      header: 'Error',
-      message: 'El nombre de usuario o contraseña no son válidos',
-      buttons: ['OK']
-    });
-    await alert.present();
   }
 
   togglePasswordMode() {
