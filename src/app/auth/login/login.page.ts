@@ -3,8 +3,11 @@ import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as fromLogin from '../login/store';
 import { Store } from '@ngrx/store';
-import { LoadingController } from '@ionic/angular';
+import {AlertController, LoadingController} from '@ionic/angular';
 import {Router} from "@angular/router";
+import {first, take} from 'rxjs/operators';
+import {concatLatestFrom} from '@ngrx/effects';
+import {combineLatest, concat} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +16,12 @@ import {Router} from "@angular/router";
 })
 export class LoginPage implements OnInit {
   @ViewChild('passwordEyeRegister') passwordEye;
+  loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending).pipe(first());
+  loginError$ = this.store.select(fromLogin.getLoggedUserError).pipe(first());
+
   loginForm: FormGroup;
   username = new FormControl('', Validators.required);
   password = new FormControl('', Validators.required);
-  loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending);
   passwordTypeInput  =  'password';
   passwordIcon  =  'eye-off';
 
@@ -25,6 +30,7 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     private loadingController: LoadingController,
+    private alertController: AlertController,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -47,8 +53,8 @@ export class LoginPage implements OnInit {
 
   async presentLoading() {
     const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
+      message: 'Cargando...',
+      id:'loading-controller'
     });
     await loading.present();
     this.listenForLogin();
@@ -57,10 +63,30 @@ export class LoginPage implements OnInit {
   listenForLogin(): void {
     this.loginUserPending$.pipe().subscribe(pending => {
       if(!pending) {
-        this.loadingController.dismiss();
-        this.router.navigate(['/home']);
+        this.listenForError();
       }
     })
+  }
+
+  listenForError() {
+    this.loginError$.subscribe(error => {
+      if(!error) {
+        this.router.navigate(['/home']);
+      } else {
+        this.loadingController.dismiss();
+        this.presentAlert();
+      }
+    })
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'alert-error',
+      header: 'Error',
+      message: 'El nombre de usuario o contraseña no son válidos',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   togglePasswordMode() {
