@@ -11,6 +11,7 @@ import {StoreModule} from "@ngrx/store";
 import {LoginPageModule} from "./auth/login/login.module";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {HomePageModule} from './pages/home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +25,10 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     StoreDevtoolsModule.instrument({
       maxAge: 20
     }),
-    LoginPageModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    LoginPageModule,
+    HomePageModule],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
   bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule {}

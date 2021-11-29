@@ -5,9 +5,10 @@ import * as fromLogin from '../login/store';
 import { Store } from '@ngrx/store';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {Router} from "@angular/router";
-import {first, last, take} from 'rxjs/operators';
+import {first, last, map, take} from 'rxjs/operators';
 import {concatLatestFrom} from '@ngrx/effects';
-import {combineLatest, concat} from 'rxjs';
+import {combineLatest, concat, forkJoin} from 'rxjs';
+import {error} from 'protractor';
 
 @Component({
   selector: 'app-login',

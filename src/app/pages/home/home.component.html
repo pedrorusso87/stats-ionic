@@ -1,0 +1,30 @@
+<app-title></app-title>
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col size="12" size-sm="10" offset-sm="1" size-md="8" offset-md="2" size-lg="6" offset-lg="3" size-xl="4"
+             offset-xl="4">
+      <ion-card (click)="onCardClicked()" button="true" color="secondary">
+        <ion-card-header class="next-match-card">
+          <ion-card-title>{{'proximo partido' | titlecase}}</ion-card-title>
+          <ion-icon name="football" size="medium"></ion-icon>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="card-content">
+            <span>03/05/2021 - 15:00hs</span>
+            <span>Nápoles FC</span>
+          </div>
+          <span class="ion-margin-top venue">Club Sporting Lomas</span>
+        </ion-card-content>
+      </ion-card>
+      <ion-card (click)="onCardClicked()" button="true" color="success">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">{{'mi equipo' | titlecase}}</ion-card-title>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-card-header>
+        <ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<app-tabs></app-tabs>

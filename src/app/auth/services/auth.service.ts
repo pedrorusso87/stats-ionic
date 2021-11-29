@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {LoadingController, Platform} from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular'
-import {from, Observable } from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { UserLoginRequest } from '../models/user.login';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
