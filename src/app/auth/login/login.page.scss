@@ -10,6 +10,14 @@ ion-icon {
   padding: 0px 7px 12px 0px;
 }
 
+ion-card {
+  background-color: #ffe699;
+}
+
+ion-item::part(native) {
+  background-color: #ffe699;
+}
+
 .icon-text {
   color: black;
 }
