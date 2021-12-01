@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
   email = new FormControl('', Validators.compose([Validators.required,
     Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]));
   username = new FormControl('', Validators.required);
-  password = new FormControl('', Validators.required);
+  password = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)]));
   confirmedPassword = new FormControl('', Validators.required);
   userRegistrationRequest = {} as UserRegistrationRequest
   passwordTypeInput  =  'password';

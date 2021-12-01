@@ -31,6 +31,9 @@
             </ion-icon>
           </span>
           </ion-item>
+          <ion-label class="error-label" position="stacked"
+                     *ngIf="password.errors?.minlength">La contraseña debe tener al menos 6 caracteres
+          </ion-label>
           <ion-item class="ion-padding-top">
             <ion-label position="stacked">Repetir Contraseña</ion-label>
             <ion-input [type]="passwordTypeInput" formControlName="confirmedPassword" placeholder="Repetir Contraseña"
