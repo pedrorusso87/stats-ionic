@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { UserLoginRequest, LoginResponse} from '../../models/user.login';
+import {UserLoginRequest, LoginResponse, LoginResponseError} from '../../models/user.login';
 
 //Login actions
 export const LOGIN_USER = '[AUTH] login user';
@@ -25,7 +25,7 @@ export class SaveUserToStorage implements Action {
 
 export class LoginUserFailed implements Action {
   readonly type = LOGIN_USER_FAIL;
-  constructor( public payload: any) {}
+  constructor( public payload: LoginResponseError) {}
 }
 // action types
 export type LoginUserActions = LoginUser | LoginUserSuccess | LoginUserFailed;

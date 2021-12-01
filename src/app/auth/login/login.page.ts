@@ -5,10 +5,7 @@ import * as fromLogin from '../login/store';
 import { Store } from '@ngrx/store';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {Router} from "@angular/router";
-import {first, last, map, take} from 'rxjs/operators';
-import {concatLatestFrom} from '@ngrx/effects';
-import {combineLatest, concat, forkJoin} from 'rxjs';
-import {error} from 'protractor';
+import {LoginResponseError} from '../models/user.login';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +17,7 @@ export class LoginPage implements OnInit {
   loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending);
   loginError$ = this.store.select(fromLogin.getLoggedUserError);
   loginError = false;
+  errorMessage: string;
 
   loginForm: FormGroup;
   username = new FormControl('', Validators.required);
@@ -77,6 +75,7 @@ export class LoginPage implements OnInit {
         this.loadingController.dismiss();
         this.router.navigate(['/home']);
       } else {
+        this.setErrorMessage(error);
         this.loginError = true;
         this.loadingController.dismiss();
       }
@@ -95,5 +94,13 @@ export class LoginPage implements OnInit {
 
   getPassword(): any {
     return this.loginForm.get('password')?.value;
+  }
+
+  private setErrorMessage(error: LoginResponseError): void {
+    if (error.status === 400) {
+      this.errorMessage = 'Usuario o contraseña inválidos';
+    } else {
+      this.errorMessage = 'Hubo un error al procesar la solicitud';
+    }
   }
 }

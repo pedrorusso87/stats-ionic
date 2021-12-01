@@ -15,7 +15,10 @@ import * as fromRegister from '../register/store';
 export class RegisterPage implements OnInit {
   @ViewChild('passwordEyeRegister') passwordEye;
   registerForm: FormGroup;
-  registerUserPending$ = this.store.select(fromRegister.gerRegisterUserPending);
+  registerUserPending$ = this.store.select(fromRegister.getRegisterUserPending);
+  registerUserError$ = this.store.select(fromRegister.getRegisterUserError)
+  registerError = false;
+  errorMessage: string;
 
   email = new FormControl('', Validators.compose([Validators.required,
     Validators.pattern('^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$')]));
@@ -67,10 +70,31 @@ export class RegisterPage implements OnInit {
   listenForRegister(): void {
     this.registerUserPending$.pipe().subscribe(pending => {
       if(!pending) {
-        this.loadingController.dismiss();
-        this.router.navigate(['/home']);
+        this.listenForError();
       }
     })
+  }
+
+  private listenForError() {
+    this.registerUserError$.pipe().subscribe(error => {
+      if(!error) {
+        this.registerError = false;
+        this.loadingController.dismiss();
+        this.router.navigate(['/home']);
+      } else {
+        this.setErrorMessage(error)
+        this.registerError = true;
+        this.loadingController.dismiss();
+      }
+    })
+  }
+
+  setErrorMessage(error: any): void {
+    if(error.status === 0) {
+      this.errorMessage = 'Hubo un error al procesar la solicitud';
+    } else {
+      this.errorMessage = error.message;
+    }
   }
 
   validatePassword() {
@@ -103,5 +127,4 @@ export class RegisterPage implements OnInit {
   getConfirmedPassword(): any {
     return this.registerForm.get('confirmedPassword')?.value;
   }
-
 }

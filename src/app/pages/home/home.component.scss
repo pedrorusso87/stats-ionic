@@ -1,3 +1,7 @@
+ion-card {
+  background-color: #d9d9d9;
+}
+
 ion-card-header {
   display: flex;
   justify-content: space-between;
@@ -15,4 +19,9 @@ ion-icon {
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  color: #0d0d0d;
+}
+
+.venue {
+  color: #0d0d0d;
 }

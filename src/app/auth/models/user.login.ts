@@ -15,3 +15,10 @@ export interface LoggedUserState {
   error: any;
   currentUser: any;
 }
+
+export interface LoginResponseError {
+  error: string,
+  headers: string
+  ok: boolean,
+  status: number
+}

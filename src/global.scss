@@ -26,24 +26,24 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 ion-content{
-  --background:#1D1C22;
+  --background:#001433;
 }
 
 
 .ion-color-toolbar {
-  --ion-color-base: #E1C340 !important;
-  --ion-color-base-rgb: rgb(225, 195, 64) !important;
-  --ion-color-contrast: #000000 !important;
-  --ion-color-contrast-rgb: rgb(0, 0, 0) !important;
-  --ion-color-shade: #e0ac08 !important;
-  --ion-color-tint: #ffca22 !important;
+  --ion-color-base: #0047b3 !important;
+  --ion-color-base-rgb: rgb(0, 71, 179) !important;
+  --ion-color-contrast: white !important;
+  --ion-color-contrast-rgb: rgb(255, 255, 255) !important;
+  --ion-color-shade: #4d4dff !important;
+  --ion-color-tint: #6666ff !important;
 }
 
 .ion-color-card-header {
-  --ion-color-base: #b38600 !important;
-  --ion-color-base-rgb: rgb(179, 134, 0) !important;
-  --ion-color-contrast: #000000 !important;
-  --ion-color-contrast-rgb: rgb(0, 0, 0) !important;
-  --ion-color-shade: #e0ac08 !important;
-  --ion-color-tint: #ffca22 !important;
+  --ion-color-base: #0052cc !important;
+  --ion-color-base-rgb: rgb(0, 82, 204) !important;
+  --ion-color-contrast: white !important;
+  --ion-color-contrast-rgb: rgb(255, 255, 255) !important;
+  --ion-color-shade: #4d4dff !important;
+  --ion-color-tint: #6666ff !important;
 }

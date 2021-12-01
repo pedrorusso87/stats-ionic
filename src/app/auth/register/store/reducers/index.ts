@@ -14,4 +14,5 @@ export const reducers: ActionReducerMap<RegisteredState, RegisterUserActions> = 
 const registerUserState = createFeatureSelector<RegisteredState>('registeredUser');
 
 export const getRegisteredUserState = createSelector(registerUserState, (state: RegisteredState) => state.registeredUser);
-export const gerRegisterUserPending = createSelector(getRegisteredUserState, (state: RegisteredUserState) => state.registerPending);
+export const getRegisterUserPending = createSelector(getRegisteredUserState, (state: RegisteredUserState) => state.registerPending);
+export const getRegisterUserError = createSelector(getRegisteredUserState, (state: RegisteredUserState) => state.error);
