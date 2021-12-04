@@ -15,11 +15,36 @@ ion-icon {
   font-size: 1.5rem;
 }
 
+ion-list {
+  margin: 0;
+  padding-top: 0;
+}
+
+.spinner {
+  color: white
+}
+
+.spinner-div {
+  margin-top: 300px;
+}
+
 .card-content {
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   color: #0d0d0d;
+}
+
+.list-header {
+  background-color: #0047b3;
+  color: white;
+  font-size: large;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.item-background-color {
+  --ion-item-background:#d9d9d9;
 }
 
 .venue {

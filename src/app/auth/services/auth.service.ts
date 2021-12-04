@@ -35,6 +35,12 @@ export class AuthService {
     return this.storage.get(TOKEN_KEY) || [];
   }
 
+  async getUsername() {
+    return await this.storage.get('username').then(username => {
+      return username;
+    })
+  }
+
   loginUser(userLoginRequest: UserLoginRequest): Observable<any> {
     return this.httpClient.post(`${this.url}/api/auth/login`, userLoginRequest);
   }

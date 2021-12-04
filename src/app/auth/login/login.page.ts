@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as fromLogin from '../login/store';
@@ -12,7 +12,7 @@ import {LoginResponseError} from '../models/user.login';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   @ViewChild('passwordEyeRegister') passwordEye;
   loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending);
   loginError$ = this.store.select(fromLogin.getLoggedUserError);
@@ -102,5 +102,9 @@ export class LoginPage implements OnInit {
     } else {
       this.errorMessage = 'Hubo un error al procesar la solicitud';
     }
+  }
+
+  ngOnDestroy() {
+    this.loginError$
   }
 }

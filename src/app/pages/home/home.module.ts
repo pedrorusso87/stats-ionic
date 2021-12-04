@@ -6,6 +6,9 @@ import {HomeComponent} from './home.component';
 import {HomeRoutingModule} from './home-routing.module';
 import {ComponentsModule} from '../../components/components.module';
 import {TabsPageModule} from '../tabs/tabs.module';
+import {StoreModule} from '@ngrx/store';
+import {effects, reducers} from '../../pages/home/store';
+import {EffectsModule} from '@ngrx/effects';
 
 @NgModule({
 
@@ -15,7 +18,9 @@ import {TabsPageModule} from '../tabs/tabs.module';
     FormsModule,
     HomeRoutingModule,
     ComponentsModule,
-    TabsPageModule
+    TabsPageModule,
+    StoreModule.forFeature('getTeams', reducers),
+    EffectsModule.forFeature(effects),
   ],
   exports: [],
   declarations: [HomeComponent]
