@@ -1,0 +1,22 @@
+<ion-card (click)="onCardClicked()" button="true" color="toolbar">
+  <ion-card-header color="card-header">
+    <ion-card-title class="ion-text-center">{{'mis equipos' | titlecase}}</ion-card-title>
+    <ion-icon name="information-circle"></ion-icon>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list class="card-content ion-no-padding">
+      <ion-item *ngIf="teamsList.length === 0" class="item-background-color no-teams-item" lines="none">
+        <label>Todavia no tienes equipos.</label>
+      </ion-item>
+      <ion-item *ngFor="let team of teamsList" class="item-background-color">
+        <ion-label>
+          <h2>{{team.name}}</h2>
+        </ion-label>
+        <ion-label class="ion-text-right">
+          <h2 class="team-status-label" [ngClass]="team.status === 'ACTIVE' ? 'active-team' : 'inactive-team'">
+            {{getStatusText(team.status)}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

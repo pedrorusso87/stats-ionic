@@ -1,0 +1,32 @@
+ion-card {
+  background-color: #d9d9d9;
+}
+
+ion-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+ion-card-content {
+  padding-top: 10px;
+}
+
+ion-icon {
+  font-size: 1.5rem;
+}
+
+.active-team {
+  color: limegreen;
+}
+
+.card-content {
+  color: #0d0d0d;
+}
+
+.inactive-team {
+  color: #9d9fa6;
+}
+
+.team-status-label {
+  font-weight: bold;
+}

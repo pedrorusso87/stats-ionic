@@ -3,6 +3,7 @@ import {AuthService} from '../../auth/services/auth.service';
 import {Store} from '@ngrx/store';
 import * as fromGetUserActions from './store/teams-actions';
 import * as fromGetUser from './store';
+import {Teams} from './models/teams.model';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import * as fromGetUser from './store';
 export class HomeComponent implements OnInit {
   username: string;
   loading = true;
+  teamsList: Teams[] = [];
   getTeamsPending$ = this.store.select(fromGetUser.getTeamsByUserPending);
   getTeamsList$ = this.store.select(fromGetUser.getTeamsByUser);
   constructor(
@@ -30,17 +32,14 @@ export class HomeComponent implements OnInit {
     console.log(this.username)
     this.store.dispatch(new fromGetUserActions.GetTeamsByUser(request))
     this.getTeamsPending$.pipe().subscribe(pending => {
-      console.log(pending)
       if(!pending) {
-        this.getTeamsList$.pipe().subscribe(teams => {
-          console.log(teams)
-          this.loading = false;
+        this.getTeamsList$.pipe().subscribe(items => {
+          if(items) {
+            this.loading = false;
+            this.teamsList = items.teamsList;
+          }
         })
       }
     })
-  }
-
-  onCardClicked() {
-    console.log("addasd")
   }
 }

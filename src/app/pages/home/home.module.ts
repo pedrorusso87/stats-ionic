@@ -9,19 +9,21 @@ import {TabsPageModule} from '../tabs/tabs.module';
 import {StoreModule} from '@ngrx/store';
 import {effects, reducers} from '../../pages/home/store';
 import {EffectsModule} from '@ngrx/effects';
+import {CardsComponentsModule} from '../../components/cards/cards.components.module';
 
 @NgModule({
 
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    HomeRoutingModule,
-    ComponentsModule,
-    TabsPageModule,
-    StoreModule.forFeature('getTeams', reducers),
-    EffectsModule.forFeature(effects),
-  ],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        HomeRoutingModule,
+        ComponentsModule,
+        TabsPageModule,
+        StoreModule.forFeature('getTeams', reducers),
+        EffectsModule.forFeature(effects),
+        CardsComponentsModule,
+    ],
   exports: [],
   declarations: [HomeComponent]
 })
