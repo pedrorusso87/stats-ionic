@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Teams} from '../../../pages/home/models/teams.model';
 import {Router} from '@angular/router';
+import {Teams} from '../../../pages/teams/models/teams.model';
 
 @Component({
   selector: 'user-teams-card',

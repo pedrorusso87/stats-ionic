@@ -12,7 +12,7 @@ import {LoginPageModule} from "./auth/login/login.module";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {HomePageModule} from './pages/home/home.module';
-import {AddTeamPageModule} from './pages/add-team/add-team-page.module';
+import {AddTeamPageModule} from './pages/teams/add-team/add-team-page.module';
 
 @NgModule({
   declarations: [AppComponent],

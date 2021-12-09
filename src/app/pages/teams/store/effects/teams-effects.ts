@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import * as teamsActions from '../teams-actions';
-import {TeamsService} from '../../../../auth/services/teams.service';
+import {TeamsService} from '../../../../services/teams.service';
 
 @Injectable()
 export default class TeamsEffects {
@@ -15,7 +15,7 @@ export default class TeamsEffects {
   getTeamsByUser$ = createEffect(() => this.actions$.pipe(
     ofType(teamsActions.GET_TEAMS_BY_USER),
     switchMap((data: any) => {
-      return from(this.teamsService.getUserTeams(data.payload.username)).pipe(
+      return this.teamsService.getUserTeams(data.payload.username).pipe(
         map((response) => {
           return new teamsActions.GetTeamsByUserSuccess(response)
         }),
@@ -24,4 +24,17 @@ export default class TeamsEffects {
       );
     })
   ));
+
+  addNewTeam$ = createEffect(() => this.actions$.pipe(
+    ofType(teamsActions.ADD_NEW_TEAM),
+    switchMap((data: any) => {
+      return this.teamsService.addNewTeam(data.payload).pipe(
+        map((response) => {
+          return new teamsActions.AddNewTeamSuccess(response)
+        }),
+        catchError(error =>
+        of(new teamsActions.AddNewTeamFailed(error)))
+      )
+    })
+  ))
 }

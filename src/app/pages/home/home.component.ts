@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../auth/services/auth.service';
 import {Store} from '@ngrx/store';
-import * as fromGetUserActions from './store/teams-actions';
-import * as fromGetUser from './store';
-import {Teams} from './models/teams.model';
+import * as fromGetUserActions from '../teams/store/teams-actions';
+import * as fromGetUser from '../teams/store';
+import {Teams} from '../teams/models/teams.model';
 
 @Component({
   selector: 'app-home',

@@ -7,7 +7,7 @@ import {HomeRoutingModule} from './home-routing.module';
 import {ComponentsModule} from '../../components/components.module';
 import {TabsPageModule} from '../tabs/tabs.module';
 import {StoreModule} from '@ngrx/store';
-import {effects, reducers} from '../../pages/home/store';
+import {effects, reducers} from '../teams/store';
 import {EffectsModule} from '@ngrx/effects';
 import {CardsComponentsModule} from '../../components/cards/cards.components.module';
 
