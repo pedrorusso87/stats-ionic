@@ -1,14 +1,10 @@
-ion-card {
-  background-color: #d9d9d9;
+ion-card-content {
+  padding-top: 10px;
 }
 
 ion-card-header {
   display: flex;
   justify-content: space-between;
-}
-
-ion-card-content {
-  padding-top: 10px;
 }
 
 ion-icon {

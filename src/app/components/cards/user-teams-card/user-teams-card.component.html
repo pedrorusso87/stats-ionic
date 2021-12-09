@@ -1,4 +1,4 @@
-<ion-card (click)="onCardClicked()" button="true" color="toolbar">
+<ion-card color="toolbar">
   <ion-card-header color="card-header">
     <ion-card-title class="ion-text-center">{{'mis equipos' | titlecase}}</ion-card-title>
     <ion-icon name="information-circle"></ion-icon>
@@ -8,6 +8,11 @@
       <ion-item *ngIf="teamsList.length === 0" class="item-background-color no-teams-item" lines="none">
         <label>Todavia no tienes equipos.</label>
       </ion-item>
+      <ion-button *ngIf="teamsList.length === 0"
+        class="ion-no-margin"
+        fill="solid" expand="full" color="primary"
+        (click)="navigate()">
+        Agregar Equipo</ion-button>
       <ion-item *ngFor="let team of teamsList" class="item-background-color">
         <ion-label>
           <h2>{{team.name}}</h2>

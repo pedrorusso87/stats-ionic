@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Teams} from '../../../pages/home/models/teams.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'user-teams-card',
@@ -8,18 +9,19 @@ import {Teams} from '../../../pages/home/models/teams.model';
 })
 export class UserTeamsCardComponent implements OnInit {
 @Input() teamsList: Teams[];
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
     console.log(this.teamsList)
   }
 
-
-  onCardClicked() {
-    console.log("addasd")
-  }
-
   getStatusText(status: string): string {
     return status === 'ACTIVE' ? 'ACTIVO' : 'DE BAJA'
+  }
+
+  navigate() {
+    this.router.navigate(['add-team'])
   }
 }
