@@ -20,7 +20,12 @@ const routes: Routes = [
   {
     path: 'add-team',
     loadChildren: () => import('./pages/teams/add-team/add-team-page.module').then(m => m.AddTeamPageModule)
+  },
+  {
+    path: 'team-details',
+    loadChildren: () => import('./pages/teams/team-details/team-details.module').then(m => m.TeamDetailsPageModule)
   }
+
 ];
 @NgModule({
   imports: [

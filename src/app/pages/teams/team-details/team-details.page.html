@@ -1,0 +1,44 @@
+<ion-content>
+  <ion-list class="ion-no-padding ion-margin-top">
+    <ion-item class="item-background-color">
+      <div>
+        <ion-label position="stacked" slot="start">Nombre</ion-label>
+        <ion-input type="text" value="{{getTeamName()}}"></ion-input>
+      </div>
+      <ion-button slot="end" class="ion-margin-top" (click)="change()">
+        Modificar
+      </ion-button>
+    </ion-item>
+    <ion-item class="item-background-color">
+      <div>
+        <ion-label position="stacked" slot="start">Fecha de Fundacion</ion-label>
+        <ion-input type="text" value="{{getDummyDate()}}"></ion-input>
+      </div>
+      <ion-button slot="end" class="ion-margin-top" (click)="change()">
+        Modificar
+      </ion-button>
+    </ion-item>
+    <ion-item class="item-background-color">
+      <div>
+        <ion-label position="stacked" slot="start">Delegado</ion-label>
+        <ion-input type="text" value="{{getDummyName()}}"></ion-input>
+      </div>
+      <ion-button slot="end" class="ion-margin-top" (click)="change()">
+        Modificar
+      </ion-button>
+    </ion-item>
+    <ion-item class="item-background-color" lines="none">
+      <ion-label slot="start">Fecha de Creacion</ion-label>
+      <ion-label slot="end">{{getDummyDate()}}</ion-label>
+    </ion-item>
+    <div class="buttons">
+      <ion-button color="danger" class="ion-no-margin" (click)="change()">
+        Eliminar equipo
+      </ion-button>
+      <ion-button color="primary" class="ion-no-margin" (click)="change()">
+        Modificar Equipo
+      </ion-button>
+    </div>
+  </ion-list>
+
+</ion-content>
