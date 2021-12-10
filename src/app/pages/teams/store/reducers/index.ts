@@ -20,4 +20,5 @@ export const getTeamsByUser = createSelector(getTeamsState, (state: TeamsState) 
 export const getTeamsByUserError = createSelector(getTeamsState, (state: TeamsState) => state.error);
 
 export const addNewTeamPending = createSelector(getTeamsState, (state: TeamsState) => state.pending.addTeamsPending);
-export const getNewTeamUser = createSelector(getTeamsState, (state: TeamsState) => state.newTeam);
+export const getNewTeam = createSelector(getTeamsState, (state: TeamsState) => state.newTeam);
+export const getNewTeamError = createSelector(getTeamsState, (state: TeamsState) => state.error);

@@ -1,9 +1,14 @@
-<ion-content>
+<ion-content *ngIf="addNewTeamPending$ | async">
+  <div class="ion-text-center spinner-div">
+    <ion-spinner class="spinner"></ion-spinner>
+  </div>
+</ion-content>
+<ion-content *ngIf="getNewTeam$ | async as team">
   <ion-list class="ion-no-padding ion-margin-top">
     <ion-item class="item-background-color">
       <div>
         <ion-label position="stacked" slot="start">Nombre</ion-label>
-        <ion-input type="text" value="{{getTeamName()}}"></ion-input>
+        <ion-input type="text" value="{{team.name}}"></ion-input>
       </div>
       <ion-button slot="end" class="ion-margin-top" (click)="change()">
         Modificar
@@ -12,7 +17,7 @@
     <ion-item class="item-background-color">
       <div>
         <ion-label position="stacked" slot="start">Fecha de Fundacion</ion-label>
-        <ion-input type="text" value="{{getDummyDate()}}"></ion-input>
+        <ion-input type="text" value="{{team.foundationDate}}"></ion-input>
       </div>
       <ion-button slot="end" class="ion-margin-top" (click)="change()">
         Modificar
@@ -29,7 +34,7 @@
     </ion-item>
     <ion-item class="item-background-color" lines="none">
       <ion-label slot="start">Fecha de Creacion</ion-label>
-      <ion-label slot="end">{{getDummyDate()}}</ion-label>
+      <ion-label slot="end">{{team.dateCreated}}</ion-label>
     </ion-item>
     <div class="buttons">
       <ion-button color="danger" class="ion-no-margin" (click)="change()">
@@ -40,5 +45,4 @@
       </ion-button>
     </div>
   </ion-list>
-
 </ion-content>

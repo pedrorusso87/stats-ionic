@@ -4,6 +4,7 @@ import {formatDate} from '@angular/common';
 import {AddTeamRequest} from '../models/teams.model';
 import {Store} from '@ngrx/store';
 import * as fromTeams from '../store/teams-actions'
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class AddTeamPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {
     this.addTeamForm = this.fb.group({
       teamName: this.teamName,
@@ -51,6 +53,7 @@ export class AddTeamPageComponent implements OnInit {
 
   saveTeam() {
     this.store.dispatch(new fromTeams.AddNewTeam(this.createAddTeamRequest()))
+    this.router.navigate(["team-details"])
   }
 
   private createAddTeamRequest() {
