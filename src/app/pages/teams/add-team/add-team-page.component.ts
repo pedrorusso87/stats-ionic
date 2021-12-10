@@ -35,7 +35,7 @@ export class AddTeamPageComponent implements OnInit {
   ngOnInit() {}
 
   handleChange(date: any) {
-    const formattedDate = formatDate(date, 'YYYY-MM-dd', 'en-US')
+    const formattedDate = formatDate(date.value, 'YYYY-MM-dd', 'en-US')
     this.setFoundationDate(formattedDate);
   }
 
