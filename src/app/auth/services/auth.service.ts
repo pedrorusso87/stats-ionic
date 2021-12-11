@@ -50,9 +50,15 @@ export class AuthService {
   }
 
   saveUser(data) {
-    this.storage.set(TOKEN_KEY, data.authenticationToken)
-    this.storage.set('username', data.username)
-    return new loginUserActions.LoginUserSuccess()
+    return this.saveUserToStorage(data).then(() => {
+      return new loginUserActions.LoginUserSuccess()
+    });
+
+  }
+
+  async saveUserToStorage(data) {
+    await this.storage.set(TOKEN_KEY, data.authenticationToken)
+    await this.storage.set('username', data.username)
   }
 
   logout() {

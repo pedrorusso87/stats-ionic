@@ -28,7 +28,7 @@ export default class LoginEffects {
   saveUserToStorage$ = createEffect(() =>  this.actions$.pipe(
     ofType(loginUserActions.SAVE_USER),
     switchMap((data: any) => {
-      return of(this.authService.saveUser(data.payload));
+      return this.authService.saveUser(data.payload);
     })
   ));
 }
