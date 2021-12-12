@@ -14,7 +14,6 @@ export class UserTeamsCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.teamsList)
   }
 
   getStatusText(status: string): string {

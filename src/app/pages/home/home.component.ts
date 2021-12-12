@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
    const request = {
      username: this.username
    }
-    console.log(this.username)
     this.store.dispatch(new fromGetUserActions.GetTeamsByUser(request))
     this.getTeamsPending$.pipe().subscribe(pending => {
       if(!pending) {

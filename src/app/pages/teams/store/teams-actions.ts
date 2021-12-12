@@ -11,6 +11,9 @@ export const ADD_NEW_TEAM = '[TEAMS] add new team';
 export const ADD_NEW_TEAM_SUCCESS = '[TEAMS] add new team success';
 export const ADD_NEW_TEAM_FAILED = '[TEAMS] add new team failed';
 
+//
+export const CLEAR_ERRORS = '[TEAMS] clear errors';
+
 export class GetTeamsByUser implements Action {
   readonly type = GET_TEAMS_BY_USER;
   constructor( public payload: UserTeamsRequest) {}
@@ -40,6 +43,11 @@ export class AddNewTeamFailed implements Action {
   readonly type = ADD_NEW_TEAM_FAILED;
   constructor( public payload: any) {}
 }
+
+export class ClearErrors implements Action {
+  readonly type = CLEAR_ERRORS;
+  constructor() {}
+}
 // action types
 export type TeamsActions = GetTeamsByUser | GetTeamsByUserSuccess | GetTeamsByUserFailed
-  | AddNewTeam | AddNewTeamSuccess | AddNewTeamFailed;
+  | AddNewTeam | AddNewTeamSuccess | AddNewTeamFailed | ClearErrors;

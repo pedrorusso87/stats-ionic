@@ -1,31 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import * as fromGetUser from '../store';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import * as fromTeam from '../store';
 import {Store} from '@ngrx/store';
-import {addNewTeamPending, getNewTeam} from '../store';
 import {AlertController} from '@ionic/angular';
-import {error} from 'protractor';
 import {Router} from '@angular/router';
+import {getNewTeamError} from '../store';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-team-details',
   templateUrl: './team-details.page.html',
   styleUrls: ['./team-details.page.scss'],
 })
-export class TeamDetailsPage implements OnInit {
+export class TeamDetailsPage implements OnInit, OnDestroy {
 
-  addNewTeamPending$ = this.store.select(fromGetUser.addNewTeamPending);
-  getNewTeam$ = this.store.select(fromGetUser.getNewTeam);
-  getNewTeamError$ = this.store.select(fromGetUser.getNewTeamError);
+  addNewTeamPending$ = this.store.select(fromTeam.addNewTeamPending);
+  getNewTeam$ = this.store.select(fromTeam.getNewTeam);
+  getNewTeamError$ = this.store.select(fromTeam.getNewTeamError);
+  subscription: Subscription;
 
   constructor(
     private store: Store,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    this.getNewTeamError$.pipe().subscribe(error => {
+    this.subscription = this.getNewTeamError$.pipe().subscribe((error) => {
       if (error) {
+        this.store.dispatch(new fromTeam.ClearErrors())
         this.presentAlert();
       }
     })
@@ -50,7 +52,10 @@ export class TeamDetailsPage implements OnInit {
         }
       }],
     });
-
     await alert.present();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

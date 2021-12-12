@@ -12,7 +12,7 @@ import {LoginResponseError} from '../models/user.login';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit, OnDestroy {
+export class LoginPage implements OnInit {
   @ViewChild('passwordEyeRegister') passwordEye;
   loginUserPending$ = this.store.select(fromLogin.getLoggedUserPending);
   loginError$ = this.store.select(fromLogin.getLoggedUserError);
@@ -102,9 +102,5 @@ export class LoginPage implements OnInit, OnDestroy {
     } else {
       this.errorMessage = 'Hubo un error al procesar la solicitud';
     }
-  }
-
-  ngOnDestroy() {
-    this.loginError$
   }
 }

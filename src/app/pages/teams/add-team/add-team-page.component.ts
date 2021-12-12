@@ -5,6 +5,7 @@ import {AddTeamRequest} from '../models/teams.model';
 import {Store} from '@ngrx/store';
 import * as fromTeams from '../store/teams-actions'
 import {Router} from '@angular/router';
+import {AuthService} from '../../../auth/services/auth.service';
 
 
 @Component({
@@ -19,11 +20,13 @@ export class AddTeamPageComponent implements OnInit {
   dateCreated = new FormControl('', Validators.required);
   foundationDate = new FormControl('', Validators.required);
   today = new Date().toISOString();
+  username: string;
 
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.addTeamForm = this.fb.group({
       teamName: this.teamName,
@@ -51,17 +54,32 @@ export class AddTeamPageComponent implements OnInit {
     this.addTeamForm.get('foundationDate').setValue(value);
   }
 
-  saveTeam() {
-    this.store.dispatch(new fromTeams.AddNewTeam(this.createAddTeamRequest()))
+  async saveTeam() {
+    const request = await this.createAddTeamRequest().then((request => {
+      return request;
+    }));
+    this.store.dispatch(new fromTeams.AddNewTeam(request))
     this.router.navigate(["team-details"])
   }
 
-  private createAddTeamRequest() {
+  private async createAddTeamRequest() {
+    await this.getUsername().then(username => {
+      this.username = username;
+    });
     const addTeamRequest = {
       foundationDate: this.getFoundationDate(),
       teamName: this.getTeamName(),
-      dateCreated: this.today
+      dateCreated: this.today,
+      teamOwner: {
+        username: this.username
+      }
     } as AddTeamRequest
     return addTeamRequest;
+  }
+
+  private async getUsername() {
+    return await this.authService.getUsername().then((username) =>
+      {return username}
+    );
   }
 }

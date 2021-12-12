@@ -72,6 +72,12 @@ export function reducer(state = initialState, action: fromTeams.TeamsActions): T
         error: action.payload
       };
     }
+    case fromTeams.CLEAR_ERRORS: {
+      return {
+        ...state,
+        error: null
+      };
+    }
     default: {
       return { ...state };
     }
