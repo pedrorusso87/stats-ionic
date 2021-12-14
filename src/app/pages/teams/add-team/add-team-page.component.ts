@@ -59,7 +59,7 @@ export class AddTeamPageComponent implements OnInit {
       return request;
     }));
     this.store.dispatch(new fromTeams.AddNewTeam(request))
-    this.router.navigate(["team-details"])
+    this.router.navigate(["team-summary"])
   }
 
   private async createAddTeamRequest() {

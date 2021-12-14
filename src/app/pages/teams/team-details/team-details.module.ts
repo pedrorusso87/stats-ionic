@@ -15,6 +15,9 @@ import { TeamDetailsPage } from './team-details.page';
     IonicModule,
     TeamDetailsPageRoutingModule
   ],
+  exports: [
+    TeamDetailsPage
+  ],
   declarations: [TeamDetailsPage]
 })
 export class TeamDetailsPageModule {}

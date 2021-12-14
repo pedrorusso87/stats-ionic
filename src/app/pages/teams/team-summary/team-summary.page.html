@@ -1,0 +1,9 @@
+<ion-content *ngIf="addNewTeamPending$ | async">
+  <div class="ion-text-center spinner-div">
+    <ion-spinner class="spinner"></ion-spinner>
+  </div>
+</ion-content>
+<ion-content *ngIf="getNewTeam$ | async as team">
+  <app-team-details
+  [team]="team"></app-team-details>
+</ion-content>

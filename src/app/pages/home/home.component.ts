@@ -3,7 +3,7 @@ import {AuthService} from '../../auth/services/auth.service';
 import {Store} from '@ngrx/store';
 import * as fromGetUserActions from '../teams/store/teams-actions';
 import * as fromGetUser from '../teams/store';
-import {Teams} from '../teams/models/teams.model';
+import {Team} from '../teams/models/teams.model';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import {Teams} from '../teams/models/teams.model';
 export class HomeComponent implements OnInit {
   username: string;
   loading = true;
-  teamsList: Teams[] = [];
+  teamsList: Team[] = [];
   getTeamsPending$ = this.store.select(fromGetUser.getTeamsByUserPending);
   getTeamsList$ = this.store.select(fromGetUser.getTeamsByUser);
   constructor(

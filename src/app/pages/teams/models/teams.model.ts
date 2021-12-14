@@ -3,10 +3,10 @@ export interface UserTeamsRequest {
 }
 export interface UserTeamsResponse {
   username: string,
-  teamsList: Teams[]
+  teamsList: Team[]
 }
 
-export interface Teams {
+export interface Team {
   id: number,
   name: string,
   status: string,

@@ -1,22 +1,18 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import * as fromTeam from '../store';
 import {Store} from '@ngrx/store';
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {getNewTeamError} from '../store';
 import {Subscription} from 'rxjs';
+import {Team} from '../models/teams.model';
 
 @Component({
   selector: 'app-team-details',
   templateUrl: './team-details.page.html',
   styleUrls: ['./team-details.page.scss'],
 })
-export class TeamDetailsPage implements OnInit, OnDestroy {
-
-  addNewTeamPending$ = this.store.select(fromTeam.addNewTeamPending);
-  getNewTeam$ = this.store.select(fromTeam.getNewTeam);
-  getNewTeamError$ = this.store.select(fromTeam.getNewTeamError);
-  subscription: Subscription;
+export class TeamDetailsPage implements OnInit {
+@Input() team: Team;
 
   constructor(
     private store: Store,
@@ -24,38 +20,13 @@ export class TeamDetailsPage implements OnInit, OnDestroy {
     private router: Router,
   ) { }
 
-  ngOnInit() {
-    this.subscription = this.getNewTeamError$.pipe().subscribe((error) => {
-      if (error) {
-        this.store.dispatch(new fromTeam.ClearErrors())
-        this.presentAlert();
-      }
-    })
-  }
-
-  change() {
-    console.log()
-  }
+  ngOnInit() {}
 
   getDummyName() {
     return 'Diego Maradona'
   }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      message: 'Error al crear el equipo. Intente nuevamente',
-      buttons: [{
-        text: 'Volver',
-        handler: () => {
-          this.alertController.dismiss();
-          this.router.navigate(["add-team"])
-        }
-      }],
-    });
-    await alert.present();
-  }
+  change() {
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
