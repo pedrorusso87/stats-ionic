@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import {AddTeamRequest} from '../models/teams.model';
@@ -38,7 +38,9 @@ export class AddTeamPageComponent implements OnInit {
   ngOnInit() {}
 
   handleChange(date: any) {
+    console.log(date.value)
     const formattedDate = formatDate(date.value, 'YYYY-MM-dd', 'en-US')
+    console.log(formattedDate)
     this.setFoundationDate(formattedDate);
   }
 
@@ -66,15 +68,14 @@ export class AddTeamPageComponent implements OnInit {
     await this.getUsername().then(username => {
       this.username = username;
     });
-    const addTeamRequest = {
+    return {
       foundationDate: this.getFoundationDate(),
       teamName: this.getTeamName(),
       dateCreated: this.today,
       teamOwner: {
         username: this.username
       }
-    } as AddTeamRequest
-    return addTeamRequest;
+    } as AddTeamRequest;
   }
 
   private async getUsername() {

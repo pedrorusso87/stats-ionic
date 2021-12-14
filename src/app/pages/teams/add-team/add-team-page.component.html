@@ -10,14 +10,17 @@
                    placeholder="Nombre del equipo" name="teamName">
         </ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Fecha de fundacion</ion-label>
-        <ion-datetime display-format="DD/MM/YYYY" picker-format="DD-MMMM-YYYY"
-          month-names = "[Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]"
+      <ion-item lines="none">
+        <ion-label>Fecha de fundacion</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-datetime
+          show-default-time-label="false"
           cancel-text="Cancelar"
           done-text="Listo"
           [max]="today"
-          (ionChange)="handleChange($event.target)"></ion-datetime>
+          (ionChange)="handleChange($event.target)">
+        </ion-datetime>
       </ion-item>
      <!-- <ion-item lines="none">
         <label>Soy el delegado</label>
