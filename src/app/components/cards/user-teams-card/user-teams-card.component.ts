@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Teams} from '../../../pages/teams/models/teams.model';
+import {Team} from '../../../pages/teams/models/teams.model';
 
 @Component({
   selector: 'user-teams-card',
@@ -8,7 +8,7 @@ import {Teams} from '../../../pages/teams/models/teams.model';
   styleUrls: ['./user-teams-card.component.scss'],
 })
 export class UserTeamsCardComponent implements OnInit {
-@Input() teamsList: Teams[];
+@Input() teamsList: Team[];
   constructor(
     private router: Router
   ) { }
@@ -22,5 +22,10 @@ export class UserTeamsCardComponent implements OnInit {
 
   navigate() {
     this.router.navigate(['add-team'])
+  }
+
+  onTeamClicked(team: Team) {
+    console.log(team.name)
+    this.router.navigate(["/team-details", team])
   }
 }
