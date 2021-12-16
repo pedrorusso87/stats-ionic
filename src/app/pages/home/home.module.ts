@@ -20,7 +20,7 @@ import {CardsComponentsModule} from '../../components/cards/cards.components.mod
         HomeRoutingModule,
         ComponentsModule,
         TabsPageModule,
-        StoreModule.forFeature('getTeams', reducers),
+        StoreModule.forFeature('teams', reducers),
         EffectsModule.forFeature(effects),
         CardsComponentsModule,
     ],

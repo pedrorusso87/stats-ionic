@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {Team} from '../../../pages/teams/models/teams.model';
+import {Store} from '@ngrx/store';
+import * as fromTeams from '../../../pages/teams/store/teams-actions';
 
 @Component({
   selector: 'user-teams-card',
@@ -10,7 +12,8 @@ import {Team} from '../../../pages/teams/models/teams.model';
 export class UserTeamsCardComponent implements OnInit {
 @Input() teamsList: Team[];
   constructor(
-    private router: Router
+    private router: Router,
+    private store: Store
   ) { }
 
   ngOnInit() {
@@ -25,7 +28,7 @@ export class UserTeamsCardComponent implements OnInit {
   }
 
   onTeamClicked(team: Team) {
-    console.log(team.name)
-    this.router.navigate(["/team-details", team])
+    this.store.dispatch(new fromTeams.SelectTeam(team))
+    this.router.navigate(["/selected-user-team"])
   }
 }

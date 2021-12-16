@@ -1,14 +1,17 @@
 import * as fromTeams from '../teams-actions';
 import {TeamsState} from '../../models/teams.model';
+import {from} from 'rxjs';
 
 const initialState: TeamsState = {
   pending: {
     getTeamsPending: false,
-    addTeamsPending: false
+    addTeamsPending: false,
+    selectTeamPending: false
   },
   error: null,
   teams: null,
-  newTeam: null
+  newTeam: null,
+  selectedTeam: null
 };
 
 export function reducer(state = initialState, action: fromTeams.TeamsActions): TeamsState {
@@ -70,6 +73,25 @@ export function reducer(state = initialState, action: fromTeams.TeamsActions): T
           addTeamsPending: false
         },
         error: action.payload
+      };
+    }
+    case fromTeams.SELECT_TEAM: {
+      return {
+        ...state,
+        pending: {
+          ...state.pending,
+          selectTeamPending: true
+        },
+      };
+    }
+    case fromTeams.SELECT_TEAM_SUCCESS: {
+      return {
+        ...state,
+        pending: {
+          ...state.pending,
+          selectTeamPending: false
+        },
+        selectedTeam: action.payload
       };
     }
     case fromTeams.CLEAR_ERRORS: {

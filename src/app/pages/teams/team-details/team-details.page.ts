@@ -1,10 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import * as fromTeam from '../store';
+import {Component, Input, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AlertController} from '@ionic/angular';
-import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 import {Team} from '../models/teams.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserRegistrationRequest} from '../../../auth/models/user.register';
 
 @Component({
   selector: 'app-team-details',
@@ -14,19 +14,36 @@ import {Team} from '../models/teams.model';
 export class TeamDetailsPage implements OnInit {
 @Input() team: Team;
 
-  constructor(
-    private store: Store,
-    private alertController: AlertController,
-    private router: Router,
-  ) { }
+  modifyTeamForm: FormGroup;
+  teamName = new FormControl('',
+    Validators.compose([ Validators.required, Validators.maxLength(20)]));
+  teamOwner = new FormControl('', Validators.required);
+  foundationDate = new FormControl('', Validators.required);
 
-  ngOnInit() {}
+  constructor(
+    private fb: FormBuilder
+  ) {
+    this.modifyTeamForm = this.fb.group({
+      teamName: this.teamName,
+      teamOwner: this.teamOwner,
+      foundationDate: this.foundationDate
+    })
+  }
+
+  ngOnInit() {
+
+    console.log(this.team)
+  }
 
   getDummyName() {
     return 'Diego Maradona'
   }
 
   change() {
+
+  }
+
+  modificationEnabled() {
 
   }
 }

@@ -28,7 +28,11 @@ const routes: Routes = [
   {
     path: 'team-summary',
     loadChildren: () => import('./pages/teams/team-summary/team-summary.module').then(m => m.TeamSummaryPageModule)
+  },  {
+    path: 'selected-user-team',
+    loadChildren: () => import('./pages/teams/selected-user-team/selected-user-team.module').then( m => m.SelectedUserTeamPageModule)
   }
+
 
 
 ];

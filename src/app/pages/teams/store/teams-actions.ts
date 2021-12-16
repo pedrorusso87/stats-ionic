@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {AddTeamRequest, AddTeamResponse, UserTeamsRequest, UserTeamsResponse} from '../models/teams.model';
+import {AddTeamRequest, AddTeamResponse, Team, UserTeamsRequest, UserTeamsResponse} from '../models/teams.model';
 
 //Teams actions GET Teams
 export const GET_TEAMS_BY_USER = '[TEAMS] get teams by user';
@@ -11,7 +11,12 @@ export const ADD_NEW_TEAM = '[TEAMS] add new team';
 export const ADD_NEW_TEAM_SUCCESS = '[TEAMS] add new team success';
 export const ADD_NEW_TEAM_FAILED = '[TEAMS] add new team failed';
 
-//
+//Teams actions SELECT Team
+export const SELECT_TEAM = '[TEAMS] select user team';
+export const SELECT_TEAM_SUCCESS = '[TEAMS] select user team success';
+export const SELECT_TEAM_FAILED = '[TEAMS] select user team failed';
+
+//Teams actions CLEAR errors
 export const CLEAR_ERRORS = '[TEAMS] clear errors';
 
 export class GetTeamsByUser implements Action {
@@ -44,10 +49,27 @@ export class AddNewTeamFailed implements Action {
   constructor( public payload: any) {}
 }
 
+export class SelectTeam implements Action {
+  readonly type = SELECT_TEAM;
+  constructor( public payload: any ) {}
+}
+
+export class SelectTeamSuccess implements Action {
+  readonly type = SELECT_TEAM_SUCCESS;
+  constructor(public payload: Team) {}
+}
+
+export class SelectTeamFailed implements Action {
+  readonly type = SELECT_TEAM_FAILED;
+  constructor( public payload: any) {}
+}
+
 export class ClearErrors implements Action {
   readonly type = CLEAR_ERRORS;
   constructor() {}
 }
 // action types
-export type TeamsActions = GetTeamsByUser | GetTeamsByUserSuccess | GetTeamsByUserFailed
-  | AddNewTeam | AddNewTeamSuccess | AddNewTeamFailed | ClearErrors;
+export type TeamsActions =
+  GetTeamsByUser | GetTeamsByUserSuccess | GetTeamsByUserFailed
+  | AddNewTeam | AddNewTeamSuccess | AddNewTeamFailed | ClearErrors
+  | SelectTeam | SelectTeamSuccess | SelectTeamFailed;

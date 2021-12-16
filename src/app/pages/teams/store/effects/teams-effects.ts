@@ -4,6 +4,8 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import * as teamsActions from '../teams-actions';
 import {TeamsService} from '../../../../services/teams.service';
+import {SelectTeamSuccess} from '../teams-actions';
+import {Team} from '../../models/teams.model';
 
 @Injectable()
 export default class TeamsEffects {
@@ -35,6 +37,13 @@ export default class TeamsEffects {
         catchError(error =>
         of(new teamsActions.AddNewTeamFailed(error)))
       )
+    })
+  ))
+
+  selectTeam$ = createEffect(() => this.actions$.pipe(
+    ofType(teamsActions.SELECT_TEAM),
+    switchMap((data: any) => {
+      return of(new teamsActions.SelectTeamSuccess(data.payload))
     })
   ))
 }

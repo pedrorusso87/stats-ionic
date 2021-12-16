@@ -16,11 +16,13 @@ export interface Team {
 export interface TeamsState {
   pending: {
     getTeamsPending: boolean;
-    addTeamsPending: boolean
+    addTeamsPending: boolean;
+    selectTeamPending: boolean
   }
   error: any;
   teams: any;
-  newTeam: AddTeamResponse
+  newTeam: AddTeamResponse;
+  selectedTeam: Team
 }
 
 export interface AddTeamRequest {
