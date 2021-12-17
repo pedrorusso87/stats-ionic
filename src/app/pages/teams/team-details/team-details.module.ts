@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TeamDetailsPageRoutingModule } from './team-details-routing.module';
 
 import { TeamDetailsPage } from './team-details.page';
+import {PlayersListComponent} from '../../../components/players-list/players-list.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,6 @@ import { TeamDetailsPage } from './team-details.page';
   exports: [
     TeamDetailsPage
   ],
-  declarations: [TeamDetailsPage]
+    declarations: [TeamDetailsPage, PlayersListComponent]
 })
 export class TeamDetailsPageModule {}

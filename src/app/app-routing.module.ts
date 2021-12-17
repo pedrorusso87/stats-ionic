@@ -31,6 +31,10 @@ const routes: Routes = [
   },  {
     path: 'selected-user-team',
     loadChildren: () => import('./pages/teams/selected-user-team/selected-user-team.module').then( m => m.SelectedUserTeamPageModule)
+  },
+  {
+    path: 'player-details',
+    loadChildren: () => import('./pages/players/player-details/player-details.module').then( m => m.PlayerDetailsPageModule)
   }
 
 

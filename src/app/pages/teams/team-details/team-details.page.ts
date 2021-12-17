@@ -1,10 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {AlertController} from '@ionic/angular';
-import {ActivatedRoute} from '@angular/router';
 import {Team} from '../models/teams.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserRegistrationRequest} from '../../../auth/models/user.register';
 
 @Component({
   selector: 'app-team-details',
@@ -19,6 +15,7 @@ export class TeamDetailsPage implements OnInit {
     Validators.compose([ Validators.required, Validators.maxLength(20)]));
   teamOwner = new FormControl('', Validators.required);
   foundationDate = new FormControl('', Validators.required);
+  modifyButtonDisabled = true;
 
   constructor(
     private fb: FormBuilder
@@ -31,19 +28,39 @@ export class TeamDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log(this.team)
+    this.setControlValues();
   }
 
   getDummyName() {
     return 'Diego Maradona'
   }
 
-  change() {
+  teamNameChange() {
+    console.log(this.team.name)
+    console.log(this.getTeamName().value)
+    this.modifyButtonDisabled = this.getTeamName().value === this.team.name;
+    console.log(this.modifyButtonDisabled)
+  }
 
+  setControlValues() {
+    this.getTeamName().setValue(this.team.name)
+    this.getTeamOwner().setValue(this.getDummyName())
+    this.getFoundationDate().setValue(this.team.foundationDate)
+  }
+
+  getTeamName(): any {
+    return this.modifyTeamForm.get('teamName');
+  }
+
+  getTeamOwner(): any {
+    return this.modifyTeamForm.get('teamOwner');
+  }
+
+  getFoundationDate(): any {
+    return this.modifyTeamForm.get('foundationDate');
   }
 
   modificationEnabled() {
-
+    return this.modifyTeamForm.dirty || this.modifyTeamForm.touched
   }
 }
