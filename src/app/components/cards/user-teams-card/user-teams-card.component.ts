@@ -3,6 +3,7 @@ import {NavigationExtras, Router} from '@angular/router';
 import {Team} from '../../../pages/teams/models/teams.model';
 import {Store} from '@ngrx/store';
 import * as fromTeams from '../../../pages/teams/store/teams-actions';
+import * as fromPlayers from '../../../pages/players/store/players-actions';
 
 @Component({
   selector: 'user-teams-card',
@@ -17,6 +18,7 @@ export class UserTeamsCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new fromPlayers.GetPlayersByTeam( {teamId: '12'}))
   }
 
   getStatusText(status: string): string {
