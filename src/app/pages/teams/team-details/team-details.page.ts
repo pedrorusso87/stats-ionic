@@ -3,7 +3,7 @@ import {Team} from '../models/teams.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-team-details',
+  selector: 'team-details',
   templateUrl: './team-details.page.html',
   styleUrls: ['./team-details.page.scss'],
 })

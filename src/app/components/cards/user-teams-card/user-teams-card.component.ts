@@ -30,7 +30,7 @@ export class UserTeamsCardComponent implements OnInit {
   }
 
   onTeamClicked(team: Team) {
-    this.store.dispatch(new fromTeams.SelectTeam(team))
+    this.store.dispatch(new fromTeams.SelectTeam(team)) //-> add the call to players here?
     this.router.navigate(["/selected-user-team"])
   }
 }
