@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Team} from '../models/teams.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import * as fromPlayers from '../../players/store/reducers';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'team-details',
@@ -10,6 +12,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class TeamDetailsPage implements OnInit {
 @Input() team: Team;
 
+  getPlayersByTeamPending$ = this.store.select(fromPlayers.getPlayersByTeamStatePending)
+  playersByTeam$ = this.store.select(fromPlayers.getPlayersByTeam)
+  players: any
   modifyTeamForm: FormGroup;
   teamName = new FormControl('',
     Validators.compose([ Validators.required, Validators.maxLength(20)]));
@@ -18,7 +23,8 @@ export class TeamDetailsPage implements OnInit {
   modifyButtonDisabled = true;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store
   ) {
     this.modifyTeamForm = this.fb.group({
       teamName: this.teamName,
@@ -28,6 +34,9 @@ export class TeamDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.playersByTeam$.pipe().subscribe(players => {
+      this.players = players;
+    })
     this.setControlValues();
   }
 

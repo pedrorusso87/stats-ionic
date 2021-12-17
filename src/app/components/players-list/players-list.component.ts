@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'players-list-component',
@@ -6,9 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./players-list.component.scss'],
 })
 export class PlayersListComponent implements OnInit {
-
+@Input() players: []
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  console.log(this.players)
+  }
 
 }

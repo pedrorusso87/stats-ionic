@@ -11,7 +11,6 @@ export class SelectedUserTeamPage implements OnInit {
 
   selectedTeamPending$ = this.store.select(fromTeam.getSelectedTeamPending);
   selectedTeam$ = this.store.select(fromTeam.getSelectedTeam);
-
   constructor(private store: Store) {}
 
   ngOnInit() {

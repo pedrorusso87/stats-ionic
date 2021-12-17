@@ -18,7 +18,6 @@ export class UserTeamsCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new fromPlayers.GetPlayersByTeam( {teamId: '12'}))
   }
 
   getStatusText(status: string): string {
@@ -31,6 +30,7 @@ export class UserTeamsCardComponent implements OnInit {
 
   onTeamClicked(team: Team) {
     this.store.dispatch(new fromTeams.SelectTeam(team)) //-> add the call to players here?
+    this.store.dispatch(new fromPlayers.GetPlayersByTeam( {teamId: team.id.toString()}))
     this.router.navigate(["/selected-user-team"])
   }
 }
