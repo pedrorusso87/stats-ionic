@@ -1,4 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import * as fromPlayers from '../../pages/players/store';
+import * as fromTeam from '../../pages/teams/store';
+import {first, last, take} from 'rxjs/operators';
+import {GetPlayersByTeamResponse} from '../../pages/players/models/players.model';
 
 @Component({
   selector: 'players-list-component',
@@ -6,11 +11,32 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./players-list.component.scss'],
 })
 export class PlayersListComponent implements OnInit {
-@Input() players: []
-  constructor() { }
+  selectedTeam$ = this.store.select(fromTeam.getSelectedTeam);
+  getPlayersByTeam$ = this.store.select(fromPlayers.getPlayersByTeam);
+  teamId: string;
+  players: any
+  playersList: GetPlayersByTeamResponse[];
+  constructor(
+    private store: Store
+  ) { }
 
   ngOnInit() {
-  console.log(this.players)
+    this.selectedTeam$.pipe(first()).subscribe(team => {
+      this.teamId = team.id.toString();
+      this.store.dispatch(new fromPlayers.GetPlayersByTeam( {teamId: this.teamId}))
+    })
+  }
+
+  getPlayersByTeam() {
+
+    this.loadPlayers();
+  }
+
+  loadPlayers() {
+    this.getPlayersByTeam$.pipe(take(1)).subscribe(players => {
+      this.players = players;
+      this.playersList = this.players.playerList;
+    })
   }
 
 }

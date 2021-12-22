@@ -1,18 +1,13 @@
 <ion-accordion-group>
   <ion-accordion value="jugadores" class="accordion">
-    <ion-item slot="header" class="item-background-color">
+    <ion-item slot="header" class="item-background-color" (click)="getPlayersByTeam()">
       <ion-label>Jugadores</ion-label>
     </ion-item>
-    <ion-list slot="content">
-      <ion-item>
-        <ion-label>Red</ion-label>
+    <ion-list slot="content" *ngIf="getPlayersByTeam$ | async">
+      <ion-item *ngFor="let player of playersList">
+        <ion-label>{{player.playerName}}</ion-label>
+        <ion-label>{{player.dateOfBirth}}</ion-label>
         <ion-button slot="end" color="primary">Modificar</ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-label>Green</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Blue</ion-label>
       </ion-item>
     </ion-list>
   </ion-accordion>

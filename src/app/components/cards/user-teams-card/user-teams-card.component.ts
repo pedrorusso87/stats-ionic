@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NavigationExtras, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Team} from '../../../pages/teams/models/teams.model';
 import {Store} from '@ngrx/store';
 import * as fromTeams from '../../../pages/teams/store/teams-actions';
-import * as fromPlayers from '../../../pages/players/store/players-actions';
 
 @Component({
   selector: 'user-teams-card',
@@ -29,8 +28,7 @@ export class UserTeamsCardComponent implements OnInit {
   }
 
   onTeamClicked(team: Team) {
-    this.store.dispatch(new fromTeams.SelectTeam(team)) //-> add the call to players here?
-    this.store.dispatch(new fromPlayers.GetPlayersByTeam( {teamId: team.id.toString()}))
+    this.store.dispatch(new fromTeams.SelectTeam(team))
     this.router.navigate(["/selected-user-team"])
   }
 }

@@ -1,8 +1,3 @@
-<ion-content *ngIf="getPlayersByTeamPending$ | async">
-  <div class="ion-text-center spinner-div">
-    <ion-spinner class="spinner"></ion-spinner>
-  </div>
-</ion-content>
 <ion-content>
   <ion-header>
     <ion-toolbar color="dark">
@@ -36,8 +31,7 @@
         <ion-label slot="start">Fecha de Creacion</ion-label>
         <ion-label slot="end">{{team.dateCreated}}</ion-label>
       </ion-item>
-      <players-list-component
-        [players]="players"></players-list-component>
+      <players-list-component></players-list-component>
       <div class="buttons">
         <ion-button color="danger" class="ion-no-margin">
           Eliminar equipo
