@@ -35,6 +35,10 @@ const routes: Routes = [
   {
     path: 'player-details',
     loadChildren: () => import('./pages/players/player-details/player-details.module').then( m => m.PlayerDetailsPageModule)
+  },
+  {
+    path: 'add-player',
+    loadChildren: () => import('./pages/players/add-player/add-player.module').then( m => m.AddPlayerPageModule)
   }
 
 

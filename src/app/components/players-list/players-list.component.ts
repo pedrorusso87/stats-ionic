@@ -2,8 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as fromPlayers from '../../pages/players/store';
 import * as fromTeam from '../../pages/teams/store';
-import {first, last, take} from 'rxjs/operators';
+import {first, take} from 'rxjs/operators';
 import {GetPlayersByTeamResponse} from '../../pages/players/models/players.model';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
   selector: 'players-list-component',
@@ -17,7 +18,8 @@ export class PlayersListComponent implements OnInit {
   players: any
   playersList: GetPlayersByTeamResponse[];
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -39,4 +41,14 @@ export class PlayersListComponent implements OnInit {
     })
   }
 
+  openPlayerDetails(player: GetPlayersByTeamResponse) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        playerName: player.playerName,
+        documentNumber: player.documentNumber,
+        dateOfBirth: player.dateOfBirth
+      }
+    }
+    this.router.navigate(["/player-details"], navigationExtras)
+  }
 }

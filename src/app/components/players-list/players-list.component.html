@@ -4,10 +4,14 @@
       <ion-label>Jugadores</ion-label>
     </ion-item>
     <ion-list slot="content" *ngIf="getPlayersByTeam$ | async">
+      <ion-item *ngIf="playersList?.length === 0" lines="none">
+        <ion-label>No hay jugadores registrados</ion-label>
+        <ion-button slot="end" color="primary">Agregar</ion-button>
+      </ion-item>
       <ion-item *ngFor="let player of playersList">
         <ion-label>{{player.playerName}}</ion-label>
         <ion-label>{{player.dateOfBirth}}</ion-label>
-        <ion-button slot="end" color="primary">Modificar</ion-button>
+        <ion-button slot="end" color="primary" (click)="openPlayerDetails(player)">Ver Detalles</ion-button>
       </ion-item>
     </ion-list>
   </ion-accordion>
