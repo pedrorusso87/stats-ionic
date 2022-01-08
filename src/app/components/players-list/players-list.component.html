@@ -13,6 +13,9 @@
         <ion-label>{{player.dateOfBirth}}</ion-label>
         <ion-button slot="end" color="primary" (click)="openPlayerDetails(player)">Ver Detalles</ion-button>
       </ion-item>
+      <div *ngIf="playersList?.length !== 0" >
+        <ion-button class="add-player-button" color="primary" expand="block">Agregar Jugador</ion-button>
+      </div>
     </ion-list>
   </ion-accordion>
 </ion-accordion-group>
