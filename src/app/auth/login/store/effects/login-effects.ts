@@ -7,28 +7,23 @@ import * as loginUserActions from '../login-actions';
 
 @Injectable()
 export default class LoginEffects {
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-  ) {}
 
   loginUser$ = createEffect(() => this.actions$.pipe(
     ofType(loginUserActions.LOGIN_USER),
-    switchMap((data: any) => {
-      return from(this.authService.loginUser(data.payload)).pipe(
-        map((response) => {
-          return new loginUserActions.SaveUserToStorage(response);
-        }),
+    switchMap((data: any) => from(this.authService.loginUser(data.payload)).pipe(
+        map((response) => new loginUserActions.SaveUserToStorage(response)),
         catchError(error =>
           of(new loginUserActions.LoginUserFailed(error)))
-      );
-    })
+      ))
   ));
 
   saveUserToStorage$ = createEffect(() =>  this.actions$.pipe(
     ofType(loginUserActions.SAVE_USER),
-    switchMap((data: any) => {
-      return this.authService.saveUser(data.payload);
-    })
+    switchMap((data: any) => this.authService.saveUser(data.payload))
   ));
+
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+  ) {}
 }

@@ -16,10 +16,10 @@ export class TeamsService {
   ) {}
 
   public getUserTeams(username: string): Observable<any> {
-    return this.httpClient.get(`${this.url}/teams/${username}`)
+    return this.httpClient.get(`${this.url}/teams/${username}`);
   }
 
   public addNewTeam(newTeamRequest: AddTeamRequest): Observable<any> {
-    return this.httpClient.post(`${this.url}/teams/add`, newTeamRequest)
+    return this.httpClient.post(`${this.url}/teams/add`, newTeamRequest);
   }
 }

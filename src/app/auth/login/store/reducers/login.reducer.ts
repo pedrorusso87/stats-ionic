@@ -7,7 +7,7 @@ const initialState: LoggedUserState = {
   currentUser: null
 };
 
-export function reducer(state = initialState, action: fromLogin.LoginUserActions): LoggedUserState {
+export const reducer = (state = initialState, action: fromLogin.LoginUserActions): LoggedUserState => {
   switch (action.type) {
     case fromLogin.LOGIN_USER: {
       return {
@@ -33,5 +33,5 @@ export function reducer(state = initialState, action: fromLogin.LoginUserActions
       return { ...state };
     }
   }
-}
+};
 

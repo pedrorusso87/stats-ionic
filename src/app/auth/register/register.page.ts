@@ -16,7 +16,7 @@ export class RegisterPage implements OnInit {
   @ViewChild('passwordEyeRegister') passwordEye;
   registerForm: FormGroup;
   registerUserPending$ = this.store.select(fromRegister.getRegisterUserPending);
-  registerUserError$ = this.store.select(fromRegister.getRegisterUserError)
+  registerUserError$ = this.store.select(fromRegister.getRegisterUserError);
   registerError = false;
   errorMessage: string;
 
@@ -25,7 +25,7 @@ export class RegisterPage implements OnInit {
   username = new FormControl('', Validators.required);
   password = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)]));
   confirmedPassword = new FormControl('', Validators.required);
-  userRegistrationRequest = {} as UserRegistrationRequest
+  userRegistrationRequest = {} as UserRegistrationRequest;
   passwordTypeInput  =  'password';
   passwordIcon  =  'eye-off';
 
@@ -52,7 +52,7 @@ export class RegisterPage implements OnInit {
       username: this.getUsername(),
       email: this.getEmail(),
       password: this.getPassword()
-    }
+    };
 
     this.store.dispatch(new fromRegister.RegisterUser(this.userRegistrationRequest));
     this.presentLoading();
@@ -72,36 +72,14 @@ export class RegisterPage implements OnInit {
       if(!pending) {
         this.listenForError();
       }
-    })
-  }
-
-  private listenForError() {
-    this.registerUserError$.pipe().subscribe(error => {
-      if(!error) {
-        this.registerError = false;
-        this.loadingController.dismiss();
-        this.router.navigate(['/home']);
-      } else {
-        this.setErrorMessage(error)
-        this.registerError = true;
-        this.loadingController.dismiss();
-      }
-    })
-  }
-
-  setErrorMessage(error: any): void {
-    if(error.status === 0) {
-      this.errorMessage = 'Hubo un error al procesar la solicitud';
-    } else {
-      this.errorMessage = error.message;
-    }
+    });
   }
 
   validatePassword() {
     if (this.getConfirmedPassword() !== this.getPassword()) {
-      this.registerForm.get('confirmedPassword').setErrors({ invalid: true })
+      this.registerForm.get('confirmedPassword').setErrors({ invalid: true });
     } else {
-      this.registerForm.get('confirmedPassword').setErrors(null)
+      this.registerForm.get('confirmedPassword').setErrors(null);
     }
   }
 
@@ -126,5 +104,27 @@ export class RegisterPage implements OnInit {
 
   getConfirmedPassword(): any {
     return this.registerForm.get('confirmedPassword')?.value;
+  }
+
+  private listenForError() {
+    this.registerUserError$.pipe().subscribe(error => {
+      if(!error) {
+        this.registerError = false;
+        this.loadingController.dismiss();
+        this.router.navigate(['/home']);
+      } else {
+        this.setErrorMessage(error);
+        this.registerError = true;
+        this.loadingController.dismiss();
+      }
+    });
+  }
+
+  private setErrorMessage(error: any): void {
+    if(error.status === 0) {
+      this.errorMessage = 'Hubo un error al procesar la solicitud';
+    } else {
+      this.errorMessage = error.message;
+    }
   }
 }

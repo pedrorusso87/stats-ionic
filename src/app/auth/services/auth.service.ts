@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Platform } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular'
+import { Storage } from '@ionic/storage-angular';
 import { Observable } from 'rxjs';
 import { UserLoginRequest } from '../models/user.login';
 import { environment } from '../../../environments/environment';
@@ -36,9 +36,7 @@ export class AuthService {
   }
 
   async getUsername() {
-    return await this.storage.get('username').then(username => {
-      return username;
-    })
+    return await this.storage.get('username').then(username => username);
   }
 
   loginUser(userLoginRequest: UserLoginRequest): Observable<any> {
@@ -50,15 +48,12 @@ export class AuthService {
   }
 
   saveUser(data) {
-    return this.saveUserToStorage(data).then(() => {
-      return new loginUserActions.LoginUserSuccess()
-    });
-
+    return this.saveUserToStorage(data).then(() => new loginUserActions.LoginUserSuccess());
   }
 
   async saveUserToStorage(data) {
-    await this.storage.set(TOKEN_KEY, data.authenticationToken)
-    await this.storage.set('username', data.username)
+    await this.storage.set(TOKEN_KEY, data.authenticationToken);
+    await this.storage.set('username', data.username);
   }
 
   logout() {

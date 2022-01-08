@@ -3,13 +3,13 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import {AddTeamRequest} from '../models/teams.model';
 import {Store} from '@ngrx/store';
-import * as fromTeams from '../store/teams-actions'
+import * as fromTeams from '../store/teams-actions';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../auth/services/auth.service';
 
 
 @Component({
-  selector: 'add-team-page',
+  selector: 'app-add-team-page',
   templateUrl: './add-team-page.component.html',
   styleUrls: ['./add-team-page.component.scss'],
 })
@@ -32,15 +32,15 @@ export class AddTeamPageComponent implements OnInit {
       teamName: this.teamName,
       dateCreated: this.today,
       foundationDate: this.foundationDate
-    })
+    });
   }
 
   ngOnInit() {}
 
   handleChange(date: any) {
-    console.log(date.value)
-    const formattedDate = formatDate(date.value, 'YYYY-MM-dd', 'en-US')
-    console.log(formattedDate)
+    console.log(date.value);
+    const formattedDate = formatDate(date.value, 'YYYY-MM-dd', 'en-US');
+    console.log(formattedDate);
     this.setFoundationDate(formattedDate);
   }
 
@@ -57,11 +57,9 @@ export class AddTeamPageComponent implements OnInit {
   }
 
   async saveTeam() {
-    const request = await this.createAddTeamRequest().then((request => {
-      return request;
-    }));
-    this.store.dispatch(new fromTeams.AddNewTeam(request))
-    this.router.navigate(["team-summary"])
+    const createdRequest = await this.createAddTeamRequest().then((request => request));
+    this.store.dispatch(new fromTeams.AddNewTeam(createdRequest));
+    this.router.navigate(['team-summary']);
   }
 
   private async createAddTeamRequest() {
@@ -80,7 +78,7 @@ export class AddTeamPageComponent implements OnInit {
 
   private async getUsername() {
     return await this.authService.getUsername().then((username) =>
-      {return username}
+      username
     );
   }
 }

@@ -10,7 +10,7 @@ const initialState: PlayersState = {
   players: null,
 };
 
-export function reducer(state = initialState, action: fromPlayers.PlayersActions): PlayersState {
+export const reducer = (state = initialState, action: fromPlayers.PlayersActions): PlayersState => {
   switch (action.type) {
     case fromPlayers.GET_PLAYERS_BY_TEAM: {
       return {
@@ -52,5 +52,5 @@ export function reducer(state = initialState, action: fromPlayers.PlayersActions
       return { ...state };
     }
   }
-}
+};
 

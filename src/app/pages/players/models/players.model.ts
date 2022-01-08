@@ -11,8 +11,8 @@ export interface GetPlayersByTeamResponse {
 
 export interface PlayersState {
   pending: {
-    getPlayersByTeamPending: boolean
-  }
-  error: any,
-  players: GetPlayersByTeamResponse[]
+    getPlayersByTeamPending: boolean;
+  };
+  error: any;
+  players: GetPlayersByTeamResponse[];
 }

@@ -7,7 +7,7 @@ const initialState: RegisteredUserState = {
   username: null
 };
 
-export function reducer(state = initialState, action: fromRegister.RegisterUserActions): RegisteredUserState {
+export const reducer = (state = initialState, action: fromRegister.RegisterUserActions): RegisteredUserState => {
   switch (action.type) {
     case fromRegister.REGISTER_USER: {
       return {
@@ -33,5 +33,5 @@ export function reducer(state = initialState, action: fromRegister.RegisterUserA
       return { ...state };
     }
   }
-}
+};
 

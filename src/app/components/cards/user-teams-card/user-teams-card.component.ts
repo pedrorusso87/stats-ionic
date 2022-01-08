@@ -5,7 +5,7 @@ import {Store} from '@ngrx/store';
 import * as fromTeams from '../../../pages/teams/store/teams-actions';
 
 @Component({
-  selector: 'user-teams-card',
+  selector: 'app-user-teams-card',
   templateUrl: './user-teams-card.component.html',
   styleUrls: ['./user-teams-card.component.scss'],
 })
@@ -20,15 +20,15 @@ export class UserTeamsCardComponent implements OnInit {
   }
 
   getStatusText(status: string): string {
-    return status === 'ACTIVE' ? 'ACTIVO' : 'DE BAJA'
+    return status === 'ACTIVE' ? 'ACTIVO' : 'DE BAJA';
   }
 
   navigate() {
-    this.router.navigate(['add-team'])
+    this.router.navigate(['add-team']);
   }
 
   onTeamClicked(team: Team) {
-    this.store.dispatch(new fromTeams.SelectTeam(team))
-    this.router.navigate(["/selected-user-team"])
+    this.store.dispatch(new fromTeams.SelectTeam(team));
+    this.router.navigate(['/selected-user-team']);
   }
 }

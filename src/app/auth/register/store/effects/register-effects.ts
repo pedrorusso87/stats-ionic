@@ -7,21 +7,18 @@ import * as registerUserActions from '../register-actions';
 
 @Injectable()
 export default class RegisterEffects {
+
+  loginUser$ = createEffect(() => this.actions$.pipe(
+    ofType(registerUserActions.REGISTER_USER),
+    switchMap((data: any) => from(this.authService.register(data.payload)).pipe(
+        map(() => new registerUserActions.RegisterUserSuccess()),
+        catchError(error =>
+          of(new registerUserActions.RegisterUserFailed(error)))
+      ))
+  ));
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,
   ) {}
-
-  loginUser$ = createEffect(() => this.actions$.pipe(
-    ofType(registerUserActions.REGISTER_USER),
-    switchMap((data: any) => {
-      return from(this.authService.register(data.payload)).pipe(
-        map((response) => {
-          return new registerUserActions.RegisterUserSuccess();
-        }),
-        catchError(error =>
-          of(new registerUserActions.RegisterUserFailed(error)))
-      );
-    })
-  ));
 }

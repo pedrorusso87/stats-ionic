@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
     });
    const request = {
      username: this.username
-   }
-    this.store.dispatch(new fromGetUserActions.GetTeamsByUser(request))
+   };
+    this.store.dispatch(new fromGetUserActions.GetTeamsByUser(request));
     this.getTeamsPending$.pipe().subscribe(pending => {
       if(!pending) {
         this.getTeamsList$.pipe().subscribe(items => {
@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit {
             this.loading = false;
             this.teamsList = items.teamsList;
           }
-        })
+        });
       }
-    })
+    });
   }
 }

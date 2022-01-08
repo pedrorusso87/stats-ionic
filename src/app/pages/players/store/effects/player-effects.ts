@@ -7,21 +7,18 @@ import {PlayersService} from '../../../../services/players.service';
 
 @Injectable()
 export default class PlayerEffects {
+
+  getPlayersByTeam$ = createEffect(() => this.actions$.pipe(
+    ofType(playerActions.GET_PLAYERS_BY_TEAM),
+    switchMap((data: any) => this.playersService.getPlayersByTeam(data.payload.teamId).pipe(
+        map((response) => new playerActions.GetPlayersByTeamSuccess(response)),
+        catchError(error =>
+          of(new playerActions.GetPlayersByTeamFailed(error)))
+      ))
+  ));
+
   constructor(
     private actions$: Actions,
     private playersService: PlayersService,
   ) {}
-
-  getPlayersByTeam$ = createEffect(() => this.actions$.pipe(
-    ofType(playerActions.GET_PLAYERS_BY_TEAM),
-    switchMap((data: any) => {
-      return this.playersService.getPlayersByTeam(data.payload.teamId).pipe(
-        map((response) => {
-          return new playerActions.GetPlayersByTeamSuccess(response)
-        }),
-        catchError(error =>
-          of(new playerActions.GetPlayersByTeamFailed(error)))
-      );
-    })
-  ));
 }

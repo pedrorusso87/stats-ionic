@@ -30,5 +30,5 @@ export class ClearErrors implements Action {
 }
 // action types
 export type PlayersActions =
-  GetPlayersByTeam | GetPlayersByTeamSuccess | GetPlayersByTeamFailed | ClearErrors
+  GetPlayersByTeam | GetPlayersByTeamSuccess | GetPlayersByTeamFailed | ClearErrors;
 

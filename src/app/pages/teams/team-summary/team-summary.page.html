@@ -4,6 +4,6 @@
   </div>
 </ion-content>
 <ion-content *ngIf="getNewTeam$ | async as team">
-  <team-details
-  [team]="team"></team-details>
+  <app-team-details
+  [team]="team"></app-team-details>
 </ion-content>

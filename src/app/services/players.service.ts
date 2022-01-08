@@ -15,6 +15,6 @@ export class PlayersService {
   ) {}
 
   public getPlayersByTeam(teamId: string): Observable<any> {
-    return this.httpClient.get(`${this.url}/players/${teamId}`)
+    return this.httpClient.get(`${this.url}/players/${teamId}`);
   }
 }

@@ -1,7 +1,7 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import { LoginUserActions } from '../login-actions';
 import * as fromLoginUser from './login.reducer';
-import {LoggedUserState} from "../../../models/user.login";
+import {LoggedUserState} from '../../../models/user.login';
 
 export interface LoggedState {
   loggedUser: LoggedUserState;

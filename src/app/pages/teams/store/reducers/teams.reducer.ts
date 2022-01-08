@@ -1,6 +1,5 @@
 import * as fromTeams from '../teams-actions';
 import {TeamsState} from '../../models/teams.model';
-import {from} from 'rxjs';
 
 const initialState: TeamsState = {
   pending: {
@@ -14,7 +13,7 @@ const initialState: TeamsState = {
   selectedTeam: null
 };
 
-export function reducer(state = initialState, action: fromTeams.TeamsActions): TeamsState {
+export const reducer = (state = initialState, action: fromTeams.TeamsActions): TeamsState => {
   switch (action.type) {
     case fromTeams.GET_TEAMS_BY_USER: {
       return {
@@ -104,5 +103,5 @@ export function reducer(state = initialState, action: fromTeams.TeamsActions): T
       return { ...state };
     }
   }
-}
+};
 

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'player-details',
+  selector: 'app-player-details',
   templateUrl: './player-details.page.html',
   styleUrls: ['./player-details.page.scss'],
 })
@@ -13,8 +13,8 @@ export class PlayerDetailsPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log(params['playerName'])
-    })
+      console.log(params.playerName);
+    });
   }
 
 }

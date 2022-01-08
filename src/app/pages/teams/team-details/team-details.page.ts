@@ -5,16 +5,16 @@ import * as fromPlayers from '../../players/store/reducers';
 import {Store} from '@ngrx/store';
 
 @Component({
-  selector: 'team-details',
+  selector: 'app-team-details',
   templateUrl: './team-details.page.html',
   styleUrls: ['./team-details.page.scss'],
 })
 export class TeamDetailsPage implements OnInit {
 @Input() team: Team;
 
-  getPlayersByTeamPending$ = this.store.select(fromPlayers.getPlayersByTeamStatePending)
-  playersByTeam$ = this.store.select(fromPlayers.getPlayersByTeam)
-  players: any
+  getPlayersByTeamPending$ = this.store.select(fromPlayers.getPlayersByTeamStatePending);
+  playersByTeam$ = this.store.select(fromPlayers.getPlayersByTeam);
+  players: any;
   modifyTeamForm: FormGroup;
   teamName = new FormControl('',
     Validators.compose([ Validators.required, Validators.maxLength(20)]));
@@ -30,31 +30,31 @@ export class TeamDetailsPage implements OnInit {
       teamName: this.teamName,
       teamOwner: this.teamOwner,
       foundationDate: this.foundationDate
-    })
+    });
   }
 
   ngOnInit() {
     this.playersByTeam$.pipe().subscribe(players => {
       this.players = players;
-    })
+    });
     this.setControlValues();
   }
 
   getDummyName() {
-    return 'Diego Maradona'
+    return 'Diego Maradona';
   }
 
   teamNameChange() {
-    console.log(this.team.name)
-    console.log(this.getTeamName().value)
+    console.log(this.team.name);
+    console.log(this.getTeamName().value);
     this.modifyButtonDisabled = this.getTeamName().value === this.team.name;
-    console.log(this.modifyButtonDisabled)
+    console.log(this.modifyButtonDisabled);
   }
 
   setControlValues() {
-    this.getTeamName().setValue(this.team.name)
-    this.getTeamOwner().setValue(this.getDummyName())
-    this.getFoundationDate().setValue(this.team.foundationDate)
+    this.getTeamName().setValue(this.team.name);
+    this.getTeamOwner().setValue(this.getDummyName());
+    this.getFoundationDate().setValue(this.team.foundationDate);
   }
 
   getTeamName(): any {
@@ -70,6 +70,6 @@ export class TeamDetailsPage implements OnInit {
   }
 
   modificationEnabled() {
-    return this.modifyTeamForm.dirty || this.modifyTeamForm.touched
+    return this.modifyTeamForm.dirty || this.modifyTeamForm.touched;
   }
 }

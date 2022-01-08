@@ -1,28 +1,28 @@
 export interface UserTeamsRequest {
-  username: string
+  username: string;
 }
 export interface UserTeamsResponse {
-  username: string,
-  teamsList: Team[]
+  username: string;
+  teamsList: Team[];
 }
 
 export interface Team {
-  id: number,
-  name: string,
-  status: string,
-  foundationDate: string,
-  dateCreated: string
+  id: number;
+  name: string;
+  status: string;
+  foundationDate: string;
+  dateCreated: string;
 }
 export interface TeamsState {
   pending: {
     getTeamsPending: boolean;
     addTeamsPending: boolean;
-    selectTeamPending: boolean
-  }
+    selectTeamPending: boolean;
+  };
   error: any;
   teams: any;
   newTeam: AddTeamResponse;
-  selectedTeam: Team
+  selectedTeam: Team;
 }
 
 export interface AddTeamRequest {

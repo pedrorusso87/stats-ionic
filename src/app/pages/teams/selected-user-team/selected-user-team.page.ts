@@ -3,7 +3,7 @@ import * as fromTeam from '../store';
 import {Store} from '@ngrx/store';
 
 @Component({
-  selector: 'selected-user-team',
+  selector: 'app-selected-user-team',
   templateUrl: './selected-user-team.page.html',
   styleUrls: ['./selected-user-team.page.scss'],
 })
